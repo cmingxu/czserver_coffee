@@ -1,5 +1,6 @@
-
+require './boot'
 express = require 'express'
+Resource = require 'express-resource'
 stylus = require 'stylus'
 assets = require 'connect-assets'
 mongoose = require 'mongoose'
@@ -10,16 +11,11 @@ app = express()
 
 
 # Define Port
-app.port = process.env.PORT or process.env.VMC_APP_PORT or 3000
+app.port = CONFIG.port
 
 
-# Config module exports has `setEnvironment` function that sets app settings depending on environment.
-config = require "./config"
-app.configure 'production', 'development', 'testing', ->
-	config.setEnvironment app.settings.env
 
-# TODO: move to `config`
-mongoose.connect 'mongodb://localhost/example'
+mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}"
 
 
 
