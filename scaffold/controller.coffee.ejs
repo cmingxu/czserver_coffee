@@ -6,7 +6,15 @@ module.exports =
   # Lists all <%=: name %>s
   index: (req, res) ->
     <%=: name | capitalize %>.find {}, (err, <%=: name %>s) ->
-      res.send <%=: name %>s
+      res.format
+        html: ()->
+          res.render "<%=: name %>s/index", users
+        json: ()->
+          res.send <%=: name %>s
+
+  # new <%=: name %> 
+  new: (req, res) ->
+    <%=: name %> = new <%=: name | capitalize %>
       
   # Creates new <%=: name %> with data from `req.body`
   create: (req, res) ->
@@ -20,7 +28,7 @@ module.exports =
         res.statusCode = 500
         
   # Gets <%=: name %> by id
-  get: (req, res) ->
+  show: (req, res) ->
     <%=: name | capitalize %>.findById req.params.id, (err, <%=: name %>) ->
       if not err
         res.send <%=: name %>
@@ -38,7 +46,7 @@ module.exports =
         res.statusCode = 500
     
   # Deletes <%=: name %> by id
-  delete: (req, res) ->
+  destroy: (req, res) ->
     <%=: name | capitalize %>.findByIdAndRemove req.params.id, (err) ->
       if not err
         res.send {}

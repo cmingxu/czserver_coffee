@@ -17,8 +17,9 @@ module.exports = function(name) {
     fs.writeFileSync(appDir+outputName, renderedTemplate);
     console.log("# "+outputName+" created");
   }
-  renderAndSave("controller.coffee.ejs", "src/controllers/"+ name+"s.coffee");
-  renderAndSave("model.coffee.ejs", "src/models/"+ name+".coffee");
-  renderAndSave("test.coffee.ejs", "test/"+ name+"s_test.coffee");
+  //renderAndSave("controller.coffee.ejs", "src/controllers/"+ name+"s.coffee");
+  //renderAndSave("model.coffee.ejs", "src/models/"+ name+".coffee");
+  renderAndSave("test_controller.coffee.ejs", "test/integrations/"+ name+"s_test.coffee");
+  renderAndSave("test_model.coffee.ejs", "test/models/"+ name+"s_test.coffee");
 
 }

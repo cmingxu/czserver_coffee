@@ -1,0 +1,53 @@
+Uniquser = require '../models/uniquser'
+
+# Uniquser model's CRUD controller.
+module.exports = 
+
+  # Lists all uniqusers
+  index: (req, res) ->
+    Uniquser.find {}, (err, uniqusers) ->
+      res.send uniqusers
+
+  # new uniquser 
+  new: (req, res) ->
+    uniquser = new Uniquser
+      
+  # Creates new uniquser with data from `req.body`
+  create: (req, res) ->
+    uniquser = new Uniquser req.body
+    uniquser.save (err, uniquser) ->
+      if not err
+        res.send uniquser
+        res.statusCode = 201
+      else
+        res.send err
+        res.statusCode = 500
+        
+  # Gets uniquser by id
+  show: (req, res) ->
+    Uniquser.findById req.params.id, (err, uniquser) ->
+      if not err
+        res.send uniquser
+      else
+        res.send err
+        res.statusCode = 500
+             
+  # Updates uniquser with data from `req.body`
+  update: (req, res) ->
+    Uniquser.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, uniquser) ->
+      if not err
+        res.send uniquser
+      else
+        res.send err
+        res.statusCode = 500
+    
+  # Deletes uniquser by id
+  delete: (req, res) ->
+    Uniquser.findByIdAndRemove req.params.id, (err) ->
+      if not err
+        res.send {}
+      else
+        res.send err
+        res.statusCode = 500
+      
+  

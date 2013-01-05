@@ -1,4 +1,4 @@
-class <%=: name | capitalize %> extends MongoBase
+class Chartower extends MongoBase
   @schema = @Schema(
     someField: String
   )
@@ -10,4 +10,4 @@ class <%=: name | capitalize %> extends MongoBase
 
 
 
-module.exports = <%=: name | capitalize %>.initialize()
+module.exports = Chartower.initialize()

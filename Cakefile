@@ -41,8 +41,11 @@ test = (callback) ->
     'should'
     '--require'
     './server'
+    './test/models'
+    './test/integrations'
   ]
   try
+    process.env.NODE_ENV = 'test'
     cmd = which.sync 'mocha' 
     spec = spawn cmd, options
     spec.stdout.pipe process.stdout 
@@ -121,15 +124,16 @@ task 'debug', 'start debug env', ->
   chrome.stdout.pipe process.stdout
   chrome.stderr.pipe process.stderr
   log 'Debugging server', green
-  
-option '-n', '--name [NAME]', 'name of model to `scaffold`'
+
+#option '-n', '--name [NAME]', 'name of model to `scaffold`'
 task 'scaffold', 'scaffold model/controller/test', (options) ->
-  if not options.name?
+  console.log options
+  if options.arguments.length != 3
     log "Please specify model name", red
     process.exit(1)
-  log "Scaffolding `#{options.name}`", green
+  log "Scaffolding `#{options.arguments[2]}`", green
   scaffold = require './scaffold'
-  scaffold options.name
+  scaffold options.arguments[2]
   
 
 

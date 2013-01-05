@@ -3,7 +3,7 @@ config =
   mongo_host: "localhost"
   mongo_port: "27017"
   mongo_password: ""
-  mongo_name: "czserver"
+  mongo_name: "czserver_dev"
   loglevel: "dev"
 
 module.exports = config

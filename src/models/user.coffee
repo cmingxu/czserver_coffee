@@ -1,10 +1,23 @@
-mongoose = require 'mongoose'
+class User extends MongoBase
+  @schema = @Schema(
+    uniq_user : { type : Schema.ObjectId, ref : 'UniqUser'}
+    nick_name : String
+    server: { type: Schema.ObjectId, ref : 'UniqServer'}
+    gold : Number
+    money : Number
+    food : Number
+    vip  : { type : String, enum : ['Vip1', 'Vip2', 'Vip3']}
+    created_at: { type : Date, default : Date.now }
+    updated_at: { type : Date, default : Date.now }
+  )
 
-# User model
-User = new mongoose.Schema(
-  s: String
-  body: String
-  url: String
-)
+  @schema.methods.abc = ()->
+    console.log 'hahah'
 
-module.exports = mongoose.model 'User', User
+  @schema.statics.findByName = (name, cb) ->
+    this.find({ name: new RegExp(name, 'i') }, cb)
+
+
+
+
+module.exports = User.initialize()

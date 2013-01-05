@@ -10,12 +10,13 @@ head
   // Mobile Specific
   meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
-  // CSS
+  block stylesheets
   != css('app')
   
 body
   block content
 
+  block javascripts
   != js('app')
 
 | </html>

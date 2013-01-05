@@ -1,13 +1,22 @@
 User = require '../models/user'
 
 # User model's CRUD controller.
-module.exports = 
+module.exports =
 
   # Lists all users
   index: (req, res) ->
     User.find {}, (err, users) ->
-      res.send users
-      
+      res.format
+        html: ()->
+          res.render "users/index", users
+        json: ()->
+          res.send users
+
+
+  new: (req, res) ->
+    user = new User
+    res.render "users/new", user
+     
   # Creates new user with data from `req.body`
   create: (req, res) ->
     user = new User req.body
@@ -18,9 +27,11 @@ module.exports =
       else
         res.send err
         res.statusCode = 500
+
+
         
   # Gets user by id
-  get: (req, res) ->
+  show: (req, res) ->
     User.findById req.params.id, (err, user) ->
       if not err
         res.send user
@@ -38,7 +49,7 @@ module.exports =
         res.statusCode = 500
     
   # Deletes user by id
-  delete: (req, res) ->
+  destroy: (req, res) ->
     User.findByIdAndRemove req.params.id, (err) ->
       if not err
         res.send {}

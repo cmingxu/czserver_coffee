@@ -3,16 +3,14 @@ express = require 'express'
 Resource = require 'express-resource'
 stylus = require 'stylus'
 assets = require 'connect-assets'
-mongoose = require 'mongoose'
+global.MongoBase = require "#{ROOT}/models/mongo_base"
+global.Schema    = MongoBase.Schema
+MongoBase.connect()
 
 app = express()
 
 
 app.port = CONFIG.port
-
-
-
-mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}"
 
 
 app.use express.favicon()

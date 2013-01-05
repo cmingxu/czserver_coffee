@@ -1,0 +1,8 @@
+<%=: name | capitalize %> = require process.cwd() + '/.app/models/<%=: name %>'
+
+beforeHook = (done) ->
+  done()
+
+describe "<%=: name | capitalize %>", ->
+  before beforeHook
+  it "should create new <%=: name %>", ->
