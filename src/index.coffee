@@ -5,12 +5,9 @@ stylus = require 'stylus'
 assets = require 'connect-assets'
 mongoose = require 'mongoose'
 
-#### Basic application initialization
-# Create app instance.
 app = express()
 
 
-# Define Port
 app.port = CONFIG.port
 
 
@@ -18,27 +15,31 @@ app.port = CONFIG.port
 mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}"
 
 
-
-#### View initialization 
-# Add Connect Assets.
+app.use express.favicon()
 app.use assets()
-# Set the public folder as static assets.
 app.use express.static(process.cwd() + '/public')
- 
 
-# Set View Engine.
+app.use express.logger CONFIG.loglevel
+app.use express.bodyParser()
+app.use express.methodOverride()
+app.use express.cookieParser()
+app.use express.responseTime()
+app.use (req, res, next)->
+  next()
+
+
+app.use (err, req, res, next)->
+  console.error(err.stack)
+  res.send(500, 'Something broke!')
+ 
 app.set 'view engine', 'jade'
 
-# [Body parser middleware](http://www.senchalabs.org/connect/middleware-bodyParser.html) parses JSON or XML bodies into `req.body` object
 app.use express.bodyParser()
 
 
-#### Finalization
-# Initialize routes
 routes = require './routes'
 routes(app)
 
 
-# Export application object
 module.exports = app
 
