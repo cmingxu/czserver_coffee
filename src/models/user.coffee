@@ -2,7 +2,7 @@ class User extends MongoBase
   @schema = @Schema(
     uniq_user : { type : Schema.ObjectId, ref : 'UniqUser'}
     nick_name : String
-    server: { type: Schema.ObjectId, ref : 'UniqServer'}
+    server: String
     gold : Number
     money : Number
     food : Number

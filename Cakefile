@@ -125,21 +125,30 @@ task 'debug', 'start debug env', ->
   chrome.stderr.pipe process.stderr
   log 'Debugging server', green
 
-#option '-n', '--name [NAME]', 'name of model to `scaffold`'
+option '-m', '--model [NAME]', 'name of model to `scaffold`'
 task 'scaffold', 'scaffold model/controller/test', (options) ->
-  console.log options
-  if options.arguments.length != 3
-    log "Please specify model name", red
-    process.exit(1)
-  log "Scaffolding `#{options.arguments[2]}`", green
+  log "Scaffolding `#{options.model}`", green
   scaffold = require './scaffold'
   scaffold options.arguments[2]
 
+option '-e', '--env [ENV]', 'dev|test|production'
 task 'seeds', 'seed data into db', (options) ->
   cmd = which.sync 'coffee'
+  process.env.NODE_ENV = options.env || "dev"
   coffee = spawn cmd, ["seeds.coffee"]
   coffee.stdout.pipe process.stdout
   coffee.stderr.pipe process.stderr
   coffee.on 'exit', ()->
+    process.exit(0)
+
+
+option "-n", "--name [DBNAME]", "drop a db"
+task 'drop', 'drop db', (options) ->
+  option = [options.name, "--eval", "'db.dropDatabase()'"]
+  cmd = which.sync 'mongo'
+  mongo = spawn cmd, option
+  mongo.stdout.pipe process.stdout
+  mongo.stderr.pipe process.stderr
+  mongo.on 'exit', ()->
     process.exit(0)
 
