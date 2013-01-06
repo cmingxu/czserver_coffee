@@ -32,7 +32,7 @@ module.exports =
         
   # Gets user by id
   show: (req, res) ->
-    User.findById req.params.id, (err, user) ->
+    User.findById req.params.user, (err, user) ->
       if not err
         res.send user
       else
@@ -41,7 +41,7 @@ module.exports =
              
   # Updates user with data from `req.body`
   update: (req, res) ->
-    User.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, user) ->
+    User.findByIdAndUpdate req.params.user, {"$set":req.body}, (err, user) ->
       if not err
         res.send user
       else
@@ -50,7 +50,7 @@ module.exports =
     
   # Deletes user by id
   destroy: (req, res) ->
-    User.findByIdAndRemove req.params.id, (err) ->
+    User.findByIdAndRemove req.params.user, (err) ->
       if not err
         res.send {}
       else

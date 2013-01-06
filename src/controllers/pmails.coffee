@@ -25,7 +25,7 @@ module.exports =
         
   # Gets pmail by id
   show: (req, res) ->
-    Pmail.findById req.params.id, (err, pmail) ->
+    Pmail.findById req.params.pmail, (err, pmail) ->
       if not err
         res.send pmail
       else
@@ -34,7 +34,7 @@ module.exports =
              
   # Updates pmail with data from `req.body`
   update: (req, res) ->
-    Pmail.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, pmail) ->
+    Pmail.findByIdAndUpdate req.params.pmail, {"$set":req.body}, (err, pmail) ->
       if not err
         res.send pmail
       else
@@ -42,8 +42,8 @@ module.exports =
         res.statusCode = 500
     
   # Deletes pmail by id
-  delete: (req, res) ->
-    Pmail.findByIdAndRemove req.params.id, (err) ->
+  destroy: (req, res) ->
+    Pmail.findByIdAndRemove req.params.pmail, (err) ->
       if not err
         res.send {}
       else

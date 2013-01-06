@@ -25,7 +25,7 @@ module.exports =
         
   # Gets uniquser by id
   show: (req, res) ->
-    Uniquser.findById req.params.id, (err, uniquser) ->
+    Uniquser.findById req.params.uniquser, (err, uniquser) ->
       if not err
         res.send uniquser
       else
@@ -34,7 +34,7 @@ module.exports =
              
   # Updates uniquser with data from `req.body`
   update: (req, res) ->
-    Uniquser.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, uniquser) ->
+    Uniquser.findByIdAndUpdate req.params.uniquser, {"$set":req.body}, (err, uniquser) ->
       if not err
         res.send uniquser
       else
@@ -43,7 +43,7 @@ module.exports =
     
   # Deletes uniquser by id
   delete: (req, res) ->
-    Uniquser.findByIdAndRemove req.params.id, (err) ->
+    Uniquser.findByIdAndRemove req.params.uniquser, (err) ->
       if not err
         res.send {}
       else

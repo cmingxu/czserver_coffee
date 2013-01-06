@@ -6,11 +6,13 @@ app = require process.cwd() + '/.app'
 
 
 INITIAL_DATA = {
-  "someField":"Some Data"
+  "title":"Some Data"
+  "content":"Some Data"
 }
 
 UPDATED_DATA = {
-  "someField":"Another data"
+  "title":"Another data"
+  "content":"Another data"
 }
 
 cleanDB = (done) ->

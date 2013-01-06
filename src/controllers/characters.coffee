@@ -23,9 +23,9 @@ module.exports =
         res.send err
         res.statusCode = 500
         
-  # Gets character by id
+  # Gets character by 
   show: (req, res) ->
-    Character.findById req.params.id, (err, character) ->
+    Character.findById req.params.character, (err, character) ->
       if not err
         res.send character
       else
@@ -34,16 +34,16 @@ module.exports =
              
   # Updates character with data from `req.body`
   update: (req, res) ->
-    Character.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, character) ->
+    Character.findByIdAndUpdate req.params.character, {"$set":req.body}, (err, character) ->
       if not err
         res.send character
       else
         res.send err
         res.statusCode = 500
     
-  # Deletes character by id
-  delete: (req, res) ->
-    Character.findByIdAndRemove req.params.id, (err) ->
+  # Deletes character by 
+  destroy: (req, res) ->
+    Character.findByIdAndRemove req.params.character, (err) ->
       if not err
         res.send {}
       else

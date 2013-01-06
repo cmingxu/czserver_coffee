@@ -103,7 +103,7 @@ task 'dev', 'start dev env', ->
 task 'debug', 'start debug env', ->
   # watch_coffee
   options = ['-c', '-b', '-w', '-o', '.app', 'src']
-  cmd = which.sync 'coffee'  
+  cmd = which.sync 'coffee'
   coffee = spawn cmd, options
   coffee.stdout.pipe process.stdout
   coffee.stderr.pipe process.stderr
@@ -134,7 +134,12 @@ task 'scaffold', 'scaffold model/controller/test', (options) ->
   log "Scaffolding `#{options.arguments[2]}`", green
   scaffold = require './scaffold'
   scaffold options.arguments[2]
-  
 
+task 'seeds', 'seed data into db', (options) ->
+  cmd = which.sync 'coffee'
+  coffee = spawn cmd, ["seeds.coffee"]
+  coffee.stdout.pipe process.stdout
+  coffee.stderr.pipe process.stderr
+  coffee.on 'exit', ()->
+    process.exit(0)
 
-  

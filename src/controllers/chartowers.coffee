@@ -25,7 +25,7 @@ module.exports =
         
   # Gets chartower by id
   show: (req, res) ->
-    Chartower.findById req.params.id, (err, chartower) ->
+    Chartower.findById req.params.chartower, (err, chartower) ->
       if not err
         res.send chartower
       else
@@ -34,7 +34,7 @@ module.exports =
              
   # Updates chartower with data from `req.body`
   update: (req, res) ->
-    Chartower.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, chartower) ->
+    Chartower.findByIdAndUpdate req.params.chartower, {"$set":req.body}, (err, chartower) ->
       if not err
         res.send chartower
       else
@@ -42,8 +42,8 @@ module.exports =
         res.statusCode = 500
     
   # Deletes chartower by id
-  delete: (req, res) ->
-    Chartower.findByIdAndRemove req.params.id, (err) ->
+  destroy: (req, res) ->
+    Chartower.findByIdAndRemove req.params.chartower, (err) ->
       if not err
         res.send {}
       else

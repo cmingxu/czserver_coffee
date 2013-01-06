@@ -4,16 +4,17 @@ class Uniquser extends MongoBase
     hashed_password : String
     first_name : String
     last_name : String
-    servers: [ { type: Schema.ObjectId, ref : 'UniqServer'} ]
-    last_server : { type: Schema.ObjectId, ref : 'UniqServer'} 
+    servers: [String]
+    last_server : String
     created_at : {type:Date, default: Date.now}
     updated_at : {type:Date, default: Date.now}
   )
-  @schema.methods.abc = ()->
-    console.log 'hahah'
 
   @schema.statics.findByName = (name, cb) ->
     this.find({ name: new RegExp(name, 'i') }, cb)
+
+  @schema.statics.findByEmail = (email, cb) ->
+    this.find({ email: email }, cb)
 
 
 

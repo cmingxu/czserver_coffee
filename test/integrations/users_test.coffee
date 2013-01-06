@@ -1,16 +1,17 @@
 request = require 'supertest'
 require "../test_helper"
+charlatan = require 'charlatan'
 
 User = require process.cwd() + '/.app/models/user'
 app = require process.cwd() + '/.app'
 
 
 INITIAL_DATA = {
-  "someField":"Some Data"
+  "nick_name": charlatan.Name.name()
 }
 
 UPDATED_DATA = {
-  "someField":"Another data"
+  "nick_name": charlatan.Name.name()
 }
 
 cleanDB = (done) ->
@@ -45,6 +46,7 @@ describe 'User', ->
   it "should be listed in list", (done) ->
     request(app)
       .get("/users")
+      .set("Accepted", "application/json")
       .expect 200, (err, res) ->
         res.body.should.be.an.instanceof Array
         res.body.should.have.length 1

@@ -6,6 +6,6 @@ class MongoBase
     mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}"
 
   @initialize: ()->
-    mongoose.model(@name, @schema)
+    return mongoose.model(@name, @schema)
 
 module.exports = MongoBase

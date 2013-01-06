@@ -29,7 +29,7 @@ module.exports =
         
   # Gets <%=: name %> by id
   show: (req, res) ->
-    <%=: name | capitalize %>.findById req.params.id, (err, <%=: name %>) ->
+    <%=: name | capitalize %>.findById req.params.<%=: name %>, (err, <%=: name %>) ->
       if not err
         res.send <%=: name %>
       else
@@ -38,7 +38,7 @@ module.exports =
              
   # Updates <%=: name %> with data from `req.body`
   update: (req, res) ->
-    <%=: name | capitalize %>.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, <%=: name %>) ->
+    <%=: name | capitalize %>.findByIdAndUpdate req.params.<%=: name %>, {"$set":req.body}, (err, <%=: name %>) ->
       if not err
         res.send <%=: name %>
       else
@@ -47,7 +47,7 @@ module.exports =
     
   # Deletes <%=: name %> by id
   destroy: (req, res) ->
-    <%=: name | capitalize %>.findByIdAndRemove req.params.id, (err) ->
+    <%=: name | capitalize %>.findByIdAndRemove req.params.<%=: name %>, (err) ->
       if not err
         res.send {}
       else

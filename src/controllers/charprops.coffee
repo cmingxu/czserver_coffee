@@ -25,7 +25,7 @@ module.exports =
         
   # Gets charprop by id
   show: (req, res) ->
-    Charprop.findById req.params.id, (err, charprop) ->
+    Charprop.findById req.params.charprop, (err, charprop) ->
       if not err
         res.send charprop
       else
@@ -34,7 +34,7 @@ module.exports =
              
   # Updates charprop with data from `req.body`
   update: (req, res) ->
-    Charprop.findByIdAndUpdate req.params.id, {"$set":req.body}, (err, charprop) ->
+    Charprop.findByIdAndUpdate req.params.charprop, {"$set":req.body}, (err, charprop) ->
       if not err
         res.send charprop
       else
@@ -42,8 +42,8 @@ module.exports =
         res.statusCode = 500
     
   # Deletes charprop by id
-  delete: (req, res) ->
-    Charprop.findByIdAndRemove req.params.id, (err) ->
+  destroy: (req, res) ->
+    Charprop.findByIdAndRemove req.params.charprop, (err) ->
       if not err
         res.send {}
       else

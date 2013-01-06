@@ -3,8 +3,7 @@ express = require 'express'
 Resource = require 'express-resource'
 stylus = require 'stylus'
 assets = require 'connect-assets'
-global.MongoBase = require "#{ROOT}/models/mongo_base"
-global.Schema    = MongoBase.Schema
+everyauth = require 'everyauth'
 MongoBase.connect()
 
 app = express()
@@ -22,9 +21,9 @@ app.use express.bodyParser()
 app.use express.methodOverride()
 app.use express.cookieParser()
 app.use express.responseTime()
-app.use (req, res, next)->
-  next()
+app.use express.session({ secret: 'czserver_coffee'})
 
+app.use everyauth.middleware()
 
 app.use (err, req, res, next)->
   console.error(err.stack)
