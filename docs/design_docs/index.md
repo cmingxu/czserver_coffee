@@ -42,7 +42,7 @@ by 108km.com
 
 ### 效果预览图
 
-![PreviewImage](./images/----ScreenShot GameScene.png)
+![PreviewImage](./images/GameScreen01.png)
 
 #### 经济系统： 
 
