@@ -1,4 +1,4 @@
-﻿
+
 # CZServer 接口API设计 #
 
 by 108km.com
@@ -42,7 +42,7 @@ by 108km.com
 
 ### 效果预览图
 
-<img src="./images/----ScreenShot GameScene.png"/>
+![PreviewImage](./images/----ScreenShot GameScene.png)
 
 #### 经济系统： 
 
