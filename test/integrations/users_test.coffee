@@ -79,6 +79,7 @@ describe 'User', ->
   it "should not be listed after remove", (done) ->
     request(app)
       .get("/users")
+      .set("Accept", "application/json")
       .expect 200, (err, res) ->
         res.body.should.be.an.instanceof Array
         res.body.should.have.length 0
