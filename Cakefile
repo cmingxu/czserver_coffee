@@ -135,7 +135,7 @@ option '-e', '--env [ENV]', 'dev|test|production'
 task 'seeds', 'seed data into db', (options) ->
   cmd = which.sync 'coffee'
   process.env.NODE_ENV = options.env || "dev"
-  coffee = spawn cmd, ["seeds.coffee"]
+  coffee = spawn cmd, ["./scripts/seeds.coffee"]
   coffee.stdout.pipe process.stdout
   coffee.stderr.pipe process.stderr
   coffee.on 'exit', ()->
@@ -150,5 +150,16 @@ task 'drop', 'drop db', (options) ->
   mongo.stdout.pipe process.stdout
   mongo.stderr.pipe process.stderr
   mongo.on 'exit', ()->
+    process.exit(0)
+
+
+task 'export_config', '', (options) ->
+  option = ["./scripts/csv_converter.coffee"]
+  cmd = which.sync 'coffee'
+  mongo = spawn cmd, option
+  mongo.stdout.pipe process.stdout
+  mongo.stderr.pipe process.stderr
+  mongo.on 'exit', ()->
+    console.log 'Done'
     process.exit(0)
 

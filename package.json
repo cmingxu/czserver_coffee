@@ -17,6 +17,8 @@
     , "everyauth": "*"
     , "charlatan": "*"
     , "async": "*"
+    , "csv": "*"
+    , "mkdirp": "*"
     , "wrench": "1.4.4"
   }, "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",

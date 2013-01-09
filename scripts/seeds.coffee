@@ -5,7 +5,7 @@ charlatan = require 'charlatan'
 async = require 'async'
 
 
-APP_ROOT = __dirname + "/.app"
+APP_ROOT = __dirname + "/../.app"
 process.env.NODE_ENV      = "test"
 require path.join(APP_ROOT, "boot")
 UniqUser = require path.join(APP_ROOT, "models", "uniquser")
