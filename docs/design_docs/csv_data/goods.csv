@@ -1,0 +1,9 @@
+﻿id,strKey,name,gType,desc,price_coin,price_gold,HP,MP
+,,名称,类型,描述,价格铜钱,价格元宝,恢复生命值,恢复魔法值
+,,String,Enum,String,int,int,int,int
+,SmallMPBottle,小魔法药,Goods,,100,0,,55
+,BigMPBottle,大魔法药,Goods,,200,0,,150
+,SmallHPBottle,小血瓶,Goods,,100,0,50,
+,BigMPBottle,大血瓶,Goods,,200,0,100,0
+,SmallGiftPack,小礼包,GiftPack,,,,,
+,NewbieGiftPack,新手礼包,GiftPack,,,,,

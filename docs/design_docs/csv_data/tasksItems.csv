@@ -1,0 +1,15 @@
+﻿id,strKey,name,desc,npcID,npcName,req_task_key,dialogSpeaker,dialogs,addCoins,addExp,addOtherKey,mapPrefab,enemies
+,,任务名称,任务介绍,,npc名称,任务完成前提,,,铜钱奖励,技能点奖励,其它物品Key,地图场景Prefab,敌人
+,,,,,,,,,,,,,
+,task_0101,第一滴血,消灭小僵尸,npc01,村民,,npc,您好。,300,20,,mapPrefab01,
+,,,,,,,player,您好。,,,,,
+,,,,,,,npc,最近一帮僵尸出没,,,,,
+,,,,,,,npc,搞得人心惶惶,,,,,
+,,,,,,,npc,你能帮我们去消灭它们吗,,,,,
+,,,,,,,npc,我们会很感激你的,,,,,
+,task_0101,第二滴血,拯救村民小红,npc01,村民,,npc,您好。,300,20,,mapPrefab02,
+,,,,,,,player,您好。,,,,,
+,,,,,,,npc,最近一帮僵尸出没,,,,,
+,,,,,,,npc,搞得人心惶惶,,,,,
+,,,,,,,npc,你能帮我们去消灭它们吗,,,,,
+,,,,,,,npc,我们会很感激你的,,,,,
