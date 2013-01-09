@@ -5,7 +5,7 @@ module.exports =
 
   # Lists all users
   index: (req, res) ->
-    User.find {}, (err, users) ->
+    User.find (err, users) ->
       res.format
         html: ()->
           res.render "users/index", users
@@ -50,6 +50,7 @@ module.exports =
     
   # Deletes user by id
   destroy: (req, res) ->
+    console.log req.params.user
     User.findByIdAndRemove req.params.user, (err) ->
       if not err
         res.send {}
