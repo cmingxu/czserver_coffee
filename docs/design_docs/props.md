@@ -89,14 +89,14 @@
 
 服务端也可以出一个API
 
-### `GET /props/pack_items` : 显示玩家背包的物品列表
+### `GET /props` : 显示玩家背包的物品列表
 
 背包的物品列表：
 
 支持分页功能。
 
 
-### `POST /props/buy` : 购买商品
+### `POST /props` : 购买商品
   
 参数： str_key (本商品的惟一识别字符串)
 
@@ -119,7 +119,7 @@
 
 
 
-### `POST: /props/put_on` : 穿上装备、使用消耗型装备
+### `PUT: /props/put_on` : 穿上装备、使用消耗型装备
 
 在客户端双击背包的装备，或者拖拽背包的装备到角色的装备栏时执行。
 
@@ -132,12 +132,12 @@
 
 （调用PropsController里的公用方法，AddPropToPack, UsePropFromPack等）
 
-### `POST: /props/get_off ` : 脱下装备：
+### `PUT: /props/take_off ` : 脱下装备：
 
 - 上述的操作反过来。
 
 
-### `POST: /props/update_pos` : 改变装备的排列位置
+### `PUT: /props/update_pos` : 改变装备的排列位置
 
 
 参数：装备的ID
@@ -156,7 +156,7 @@
 ## 其它
 
 
-### `POST: /characters/upgrade_prop` : 装备的强化升级
+### `POST: /props/upgrade` : 装备的强化升级
 
 逻辑跟个人升级的差不多。
 

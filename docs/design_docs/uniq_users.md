@@ -24,7 +24,7 @@
 
 # API地址：
 
-### `POST: /uniq_users/login` : 统一用户登录     
+### `POST: /tokens` : 统一用户登录     
 
 统一用户登录。
 
@@ -57,15 +57,15 @@
     - 邮件提示 
 
     
-### `POST: /uniq_users/logout` : 统一用户登出     
+### `DELETE: /tokens` : 统一用户登出     
 
 统一用户出。
 
-### `POST: /uniq_users/register` : 统一用户注册     
+### `POST: /uniq_users` : 统一用户注册     
 
 统一用户注册
 
-### `POST: /uniq_users/forget_password` : 忘记密码    
+### `PUT: /uniq_users/reset_password` : 忘记密码    
 
 忘记密码  
 
