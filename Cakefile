@@ -156,10 +156,10 @@ task 'drop', 'drop db', (options) ->
 task 'export_config', '', (options) ->
   option = ["./scripts/csv_converter.coffee"]
   cmd = which.sync 'coffee'
-  mongo = spawn cmd, option
-  mongo.stdout.pipe process.stdout
-  mongo.stderr.pipe process.stderr
-  mongo.on 'exit', ()->
+  coffee = spawn cmd, option
+  coffee.stdout.pipe process.stdout
+  coffee.stderr.pipe process.stderr
+  coffee.on 'exit', ()->
     console.log 'Done'
     process.exit(0)
 

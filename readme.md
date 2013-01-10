@@ -1,115 +1,82 @@
-# Express Coffee Template 6 (1.6)
-
-This is a Node Express CoffeeScript Stack Template
-
-It comes ready to go with connect-assets that give you the option
-to use coffee-script and stylus for the client side.
-
-## Technologies
-This is a template that can be used to create nodejs applications using 
-
-* Node v0.8.*
-* Express v3.0.5
-* CoffeeScript! v1.4.0
-* Jade v0.26.0
-* Connect Assets v2.3.3
-* MongoDB
-
-## Requirements
-
-* [NodeJs](http://nodejs.org)
-* [Express](http://expressjs.com)
-* [CoffeeScript](http://coffeescript.org)
-* [Jade](http://jade-lang.com/)
-* [connect-assets](http://github.com/TrevorBurnham/connect-assets)
-* [Mocha](http://visionmedia.github.com/mocha/)
-* [Should.Js](https://github.com/visionmedia/should.js/)
-* [Mongoose](https://github.com/LearnBoost/mongoose)
-* [Foundation](http://foundation.zurb.com/)
-
-These will install with npm, just do 
-
+## INSTALL ##
 ```
-npm install
+ brew install node
+ brew install mongodb
+ brew install redis
+ 
+ git clone git@bitbucket.org:cmingxu/czserver_coffee.git
+ npm install -d
 ```
 
-In your project directory.
 
----
-
-## Install, Build, Run, Test, and Watch
+## START ##
 
 ```
-# Install nodejs and npm
-
-git clone http://github.com/twilson63/express-coffee.git [project-name]
-cd [project-name]
-npm install
+ cake dev
 ```
 
-## Install coffee-script, mocha and docco
-
-``` sh
-npm install coffee-script -g
-npm install mocha -g
-npm install docco -g
-```
-
-# Run
+## TEST ##
 
 ```
-cake dev
+  cake test
 ```
 
-### Mocha and Request for testing
+## 如何查看程序是否启动正常 ##
+因为没有界面， 所以浏览器访问比较麻烦. curl localhost:3000/users
+看结果
 
-mocha is an extremely powerful and easy to use testing framework
+## New Scaffold ##
 
-see [http://visionmedia.github.com/mocha/](http://visionmedia.github.com/mocha/)
+```
+  cake scaffold --name MODEL_NAME
+```
 
-    describe 'Sample test', ->
-      it 'should be true', ->
-        true.should.equal true
+## TROUBLE SHOTTING ##
 
-to run mocha
+  - cake dev启动不了， 提示类似于open文件上限问题， 产生原因是coffee编译过程中到达了mac open file的上限
+```
+  sudo ulimit -n 10000
+```
 
-    cake test
-
-### Setup to deploy to heroku
-
-    rm -rf .git
-    git init
-    echo 'node_modules' >> '.gitignore'
-    git add .
-    git commit -am "first commit"
-    heroku create
-    git push heroku master
-    heroku open
+  - cake dev后提示信息有mongo相关的， 可能是mongodb没有安装，
+或者地址不正确， 配置再src/config/[dev|test|production]下。
 
 
-## Thanks to
+## FAQ ##
 
-* [Jeremy Ashkenas](https://github.com/jashkenas) for creating coffee-script
-* [TJ Holowaychuk](https://github.com/visionmedia) for creating express
-* [Miško Hevery](https://github.com/mhevery) for creating Jasmine-Node
-* [TJ Holowaychuk](https://github.com/visionmedia) for creating mocha and should.js
+  - 如何查看所有命令？
+    ```
+      cake 
+    ```
 
-## About
-
-express-coffee is a template or boiler-plate to get started writing 
-express web applications in CoffeeScript.  It comes ready to go with base
-setup for an Express Web App.  It includes a Cakefile that lets you build, 
-spec, and watch your coffeescript as you develop.  You hack in the src folder
-and run cake build to build you server files, write your mocha in
-your test folder and run cake test or spec to run your test suite.  Create your
-jade views in the views folder and put your public assets in the public
-folder.  Enjoy your express-coffee 
+  - 文件修改后如何编译？
+    ```
+      cake build
+    ```
 
 
-## License
+  - 如何导入游戏配置文件？
+    把csv文件放到相应文件夹后执行· cake export_config·,
+再路径.app/config/game_config可以看到生成后的配置文件，再boot.coffee可以找到GAME_CONFIG的全局变量
 
-See LICENSE
 
-## Contribute
 
-pull requests are welcome
+  - 哪里能找到build后的js文件？
+    .app目录下
+
+
+  - CSV(或者其他)文件为什么不能加入到版本管理中？
+    检查一下.gitignore吧
+
+  
+  - 如何生成测试数据？
+    `cake --env [test|dev|production] seeds`
+
+  
+  - 哪里放脚本？
+    scripts文件夹下， 然后编写cake， 可以仿照seeds或者export_config  
+
+  - 如何清空数据库?
+    `cake --name csserver_test drop`
+
+ 
