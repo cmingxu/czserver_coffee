@@ -5,6 +5,7 @@ config =
   mongo_password: ""
   mongo_name: "czserver_test"
   loglevel: "dev"
+  notice: "en"
 
   server_list: [
     {name: "localhost", ip: "127.0.0.1", port: 3000}

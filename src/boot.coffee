@@ -5,4 +5,4 @@ global.MongoBase = require "#{ROOT}/models/mongo_base"
 global.Schema    = MongoBase.Schema
 global._  = require 'underscore'
 global.GAME_CONFIG = require "#{ROOT}/models/game_config"
-#console.log GAME_CONFIG['goods']
+global.FN = require("#{ROOT}/config/format_notice")

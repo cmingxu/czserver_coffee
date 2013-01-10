@@ -14,6 +14,7 @@ module.exports =
       
   # Creates new uniquser with data from `req.body`
   create: (req, res) ->
+    console.log req.body
     uniquser = new Uniquser req.body
     uniquser.save (err, uniquser) ->
       if not err
@@ -21,7 +22,6 @@ module.exports =
         res.statusCode = 201
       else
         res.send err
-        res.statusCode = 500
         
   # Gets uniquser by id
   show: (req, res) ->
@@ -30,7 +30,6 @@ module.exports =
         res.send uniquser
       else
         res.send err
-        res.statusCode = 500
              
   # Updates uniquser with data from `req.body`
   update: (req, res) ->
@@ -39,7 +38,6 @@ module.exports =
         res.send uniquser
       else
         res.send err
-        res.statusCode = 500
     
   # Deletes uniquser by id
   delete: (req, res) ->
@@ -48,6 +46,5 @@ module.exports =
         res.send {}
       else
         res.send err
-        res.statusCode = 500
       
   

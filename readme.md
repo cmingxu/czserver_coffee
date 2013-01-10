@@ -77,6 +77,10 @@
     scripts文件夹下， 然后编写cake， 可以仿照seeds或者export_config  
 
   - 如何清空数据库?
-    `cake --name csserver_test drop`
+    `cake --name czserver_test drop`
 
- 
+  - 如何创建一个UniqUser
+    ```
+      curl -H "accept: application/json"  -H "Content-Type: application/json" -d '{"email": "cming.xu@gmail.com", "first_name": "ac", "last_server": "aaa"}' http://localhost:3000/uniqusers  -X POST
+
+    ```

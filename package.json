@@ -16,6 +16,7 @@
     , "underscore": "*"
     , "everyauth": "*"
     , "charlatan": "*"
+    , "mongoose-validator": "*"
     , "async": "*"
     , "csv": "*"
     , "mkdirp": "*"

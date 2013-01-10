@@ -1,15 +1,15 @@
-mongoose = require 'mongoose'
+mongoose    = require 'mongoose'
+validator   = require 'mongoose-validator'
 
 class MongoBase
   @Schema = mongoose.Schema
   @connection = null
+  @validation  = validator.validate
   @connect: ()->
-    console.log CONFIG.mongo_host
-    console.log CONFIG.mongo_name
     @connection = mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}"
 
 
   @initialize: ()->
-    return mongoose.model(@name, @schema)
+    mongoose.model(@name, @schema)
 
 module.exports = MongoBase
