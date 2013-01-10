@@ -6,4 +6,10 @@ beforeHook = (done) ->
 
 describe "Uniquser", ->
   before beforeHook
-  it "should create new uniquser", ->
+  describe " validation ", -> 
+    it "email should not blank", -> 
+    it "email should be valid", -> 
+    it "email should be uniq", -> 
+    it "password should present", -> 
+    it "password confirmation should present", -> 
+    it "password confirmation should be same as password", -> 

@@ -134,7 +134,7 @@ task 'scaffold', 'scaffold model/controller/test', (options) ->
 option '-e', '--env [ENV]', 'dev|test|production'
 task 'seeds', 'seed data into db', (options) ->
   cmd = which.sync 'coffee'
-  process.env.NODE_ENV = options.env || "dev"
+  process.env.NODE_ENV = options.env || "test"
   coffee = spawn cmd, ["./scripts/seeds.coffee"]
   coffee.stdout.pipe process.stdout
   coffee.stderr.pipe process.stderr
@@ -144,7 +144,7 @@ task 'seeds', 'seed data into db', (options) ->
 
 option "-n", "--name [DBNAME]", "drop a db"
 task 'drop', 'drop db', (options) ->
-  option = [options.name, "--eval", "'db.dropDatabase()'"]
+  option = [options.name, "--eval", "db.dropDatabase()"]
   cmd = which.sync 'mongo'
   mongo = spawn cmd, option
   mongo.stdout.pipe process.stdout
