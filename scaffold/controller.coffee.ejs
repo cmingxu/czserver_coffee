@@ -8,7 +8,7 @@ module.exports =
     <%=: name | capitalize %>.find {}, (err, <%=: name %>s) ->
       res.format
         html: ()->
-          res.render "<%=: name %>s/index", users
+          res.render "<%=: name %>s/index", <%=: name %>s
         json: ()->
           res.send <%=: name %>s
 

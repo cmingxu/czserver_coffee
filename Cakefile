@@ -125,11 +125,11 @@ task 'debug', 'start debug env', ->
   chrome.stderr.pipe process.stderr
   log 'Debugging server', green
 
-option '-m', '--model [NAME]', 'name of model to `scaffold`'
+option '-m', '--model [MODEL]', 'name of model to `scaffold`'
 task 'scaffold', 'scaffold model/controller/test', (options) ->
   log "Scaffolding `#{options.model}`", green
   scaffold = require './scaffold'
-  scaffold options.arguments[2]
+  scaffold options.model
 
 option '-e', '--env [ENV]', 'dev|test|production'
 task 'seeds', 'seed data into db', (options) ->

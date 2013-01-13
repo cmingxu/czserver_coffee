@@ -12,6 +12,7 @@ module.exports  = (app) ->
   map(app, "chartower")
   map(app, "pmail")
   map(app, "uniquser")
+  map(app, "token")
 
   app.get("/", IndexController.index)
   app.get("/login", SessionsController.new)

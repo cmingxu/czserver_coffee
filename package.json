@@ -19,6 +19,8 @@
     , "mongoose-validator": "*"
     , "async": "*"
     , "csv": "*"
+    , "hiredis": "*"
+    , "redis": "*"
     , "mkdirp": "*"
     , "wrench": "1.4.4"
   }, "scripts": {
