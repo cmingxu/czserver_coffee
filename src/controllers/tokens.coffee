@@ -34,18 +34,9 @@ module.exports =
       else
         res.send err
              
-  # Updates token with data from `req.body`
-  update: (req, res) ->
-    Token.findByIdAndUpdate req.params.token, {"$set":req.body}, (err, token) ->
-      if not err
-        res.send token
-      else
-        res.send err
-    
   # Deletes token by id
   destroy: (req, res) ->
-    Token.findByIdAndRemove req.params.token, (err) ->
-      if not err
+      if true
         res.send {}
       else
         res.send err

@@ -39,10 +39,12 @@ describe "Uniquser", ->
             err.errors.email.should.include {type: FN.uniquser_email_should_be_uniq[CONFIG.notice]}
             done()
 
-    it "password should present", (done)->
-      @uu.password = undefined
+    it "hashed_password should be set", (done)->
       @uu.save (err)->
-        if err
-          err.errors.email.should.include {type: FN.uniquser_password_should_not_blank[CONFIG.notice]}
-          done()
+        Uniquser.find()
+          .limit(1)
+          .exec (err, uu)->
+            crypto = require 'crypto'
+            if uu[0].hashed_password == crypto.createHash("sha1").update(uu[0].salt + "/" + "123").digest("hex")
+              done()
 

@@ -3,12 +3,12 @@ crypto = require 'crypto'
 class Uniquser extends MongoBase
   @schema = @Schema(
     email : {type: String, validate: [@validation({message: FN.uniquser_email_not_blank[CONFIG.notice]}, "notEmpty"), @validation({passIfEmpty: true, message: FN.uniquser_email_not_valid[CONFIG.notice]}, "isEmail")]}
-    hashed_password : {type: String, validate: @validation({message: "133"}, "notEmpty")}
+    hashed_password : String
     salt :  String
     first_name : {type: String, validate: @validation({message: FN.uniquser_first_name_not_blank[CONFIG.notice]}, "notEmpty")}
     last_name : String
     servers: [String]
-    last_server : {type: String}
+    last_server : String
     created_at : {type:Date, default: Date.now}
     updated_at : {type:Date, default: Date.now}
   )
@@ -19,6 +19,8 @@ class Uniquser extends MongoBase
   @schema.statics.findByEmail = (email, cb)->
     this.findOne({ email: email }).exec cb
 
+  @schema.methods.password_correct = (password)->
+    this.hashed_password == crypto.createHash("sha1").update(this.salt + "/" + password).digest("hex")
 
 
 Uu = Uniquser.initialize()
@@ -31,18 +33,11 @@ email_uniq_validator = (email, callback)->
 Uniquser.schema.path('email').validate email_uniq_validator, FN.uniquser_email_should_be_uniq[CONFIG.notice]
 
 Uniquser.schema.virtual('password').set((password)->
-  console.log password
-  console.log this.hashed_password
-  #this._password = password
-  #this.hashed_password = "adss"
-  )
+  this.salt = crypto.randomBytes(16).toString('base64').replace(/\//g,'_').replace(/\+/g,'-')
+  this.hashed_password =  crypto.createHash('sha1').update(this.salt + "/" + password).digest("hex")
+)
 
 
-Uniquser.schema.pre 'save', (next)->
-  if (this.hashed_password == "") || (this.hashed_password == undefined)
-    next(new Error(FN.uniquser_password_should_not_blank))
-  else
-    next()
 
 
 
