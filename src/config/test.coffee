@@ -1,6 +1,6 @@
 config =
   port: 3001
-  mongo_host: "localhost"
+  mongo_host: "127.0.0.1"
   mongo_port: "27017"
   mongo_password: ""
   mongo_name: "czserver_test"

@@ -24,24 +24,19 @@
 
 # API地址：
 
+### `GET: /uniq_servers` : 获取服务器列表     
+
 ### `POST: /tokens` : 统一用户登录     
+- 返回结果为{"token":
+  "NTBmYWFmYTBjZDc5ZTUwMDAwMDAwMDA5LzEzNTg2MDY3MDQxODA", "user_id": 123}
 
-统一用户登录。
+- 登陆之后的所有请求在http header中设置 Auth-Token: "NTBmYWFmYTBjZDc5ZTUwMDAwMDAwMDA5LzEzNTg2MDY3MDQxODA"
 
-玩家从统一用户(UniqUsers)登陆系统注册，登录。
+### `PUT: /uniq_users/last_server`
 
-#### **第一次登陆：**
-- 弹出选择服务器的列表，让玩家选中一个服务器。然后在该服务器上建立单独的user数据。选中的服务器记录在UniqUsers表的servers和last_server属性里。
-- 弹出角色选择列表，让玩家选择角色。在characters表里创建相应记录。并返回这个新建的记录。
+### `GET: /characters`
 
-
-#### **第n次登陆：**
-- 检测last_server是否存在。如果不存在则显示已经登陆过的servers列表和所有servers列表。让玩家选中一个服务器登陆。
-- 登陆后，在characters表里选出相应的记录。
-
-
-
-#### 登陆成功后跳转到/index地址，返回结果数据：
+### `GET: /uniq_users/:id`
 
     - uniq_user 统一登陆用户 
     - user 当前服务器的用户，包括充值的金钱，铜钱等等 
@@ -55,9 +50,6 @@
     - 当前场景所有人的名字，简要信息。 
     - 当前场景的聊天内容。 
     - 邮件提示 
-
-### `POST: /tokens` : 统一用户登入 
-登陆
 
     
 ### `DELETE: /tokens` : 统一用户登出     

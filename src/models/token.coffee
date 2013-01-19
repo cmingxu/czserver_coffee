@@ -16,13 +16,13 @@ class Token
         if uu.password_correct(self.password)
           token = new Buffer(uu._id + "/" + ((new Date()).valueOf()), "utf8").toString("base64")
           #save token in redis
-          callback null, token
+          callback null, {token: token}
         else
           callback {message: "", result: "password not valid"}, null
       else
           callback {message: "", result: "email not exist"}, null
 
-  @remove: (condtions, callback)->
+  @remove: (conditions, callback)->
     callback()
 
 

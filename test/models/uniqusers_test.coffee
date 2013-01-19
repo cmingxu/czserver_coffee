@@ -6,14 +6,11 @@ beforeHook = (done) ->
   @sec = new Uniquser {email: "cming.xu@gmail.com", first_name: "Kevin", servers: ["127.0.0.1", "10.0.0.1"], last_server: "127.0.0.1", password: "123"}
   Uniquser.remove({}, (err)-> done() unless err)
 
-describe "Uniquser", ->
-  beforeEach beforeHook
   describe " validation ", ->
     it "email should valid format", (done)->
       @uu.email = "not email"
       @uu.save (err)->
         if err
-          console.log err
           err.errors.email.should.include {type: FN.uniquser_email_not_valid[CONFIG.notice]}
           done()
 
