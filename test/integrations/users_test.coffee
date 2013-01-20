@@ -7,11 +7,13 @@ app = require process.cwd() + '/.app'
 
 
 INITIAL_DATA = {
-  "nick_name": charlatan.Name.name()
+  "email": charlatan.Internet.email()
+  "password": "123"
 }
 
 UPDATED_DATA = {
-  "nick_name": charlatan.Name.name()
+  "email": charlatan.Internet.email()
+  "password": "123"
 }
 
 cleanDB = (done) ->
@@ -28,17 +30,33 @@ describe 'User', ->
       .post("/users")
       .send(INITIAL_DATA)
       .expect 201, (err, res) ->
-        res.body.should.include(INITIAL_DATA)
+        res.body.should.include(_.pick(INITIAL_DATA, "email"))
         res.body.should.have.property "_id"
         res.body["_id"].should.be.ok
         user_id = res.body["_id"]
+        done()
+
+  it "should not be created when email not valid", (done) ->
+    request(app)
+      .post("/users")
+      .send({email: "add"})
+      .expect 422, (err, res) ->
+        res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}
+        done()
+        
+  it "should not be created when email emapty", (done) ->
+    request(app)
+      .post("/users")
+      .send({email: ""})
+      .expect 422, (err, res) ->
+        res.body.errors.should.include {type: FN.user_email_not_blank[CONFIG.notice], resource: "user", path: "email"}
         done()
         
   it "should be accessible by id", (done) ->
     request(app)
       .get("/users/#{user_id}")
       .expect 200, (err, res) ->
-        res.body.should.include(INITIAL_DATA)
+        res.body.should.include(_.pick(INITIAL_DATA, "email"))
         res.body.should.have.property "_id"
         res.body["_id"].should.be.eql user_id
         done()
@@ -50,7 +68,7 @@ describe 'User', ->
       .expect 200, (err, res) ->
         res.body.should.be.an.instanceof Array
         res.body.should.have.length 1
-        res.body[0].should.include(INITIAL_DATA)
+        res.body[0].should.include(_.pick(INITIAL_DATA, "email"))
         done()
     
   it "should be updated", (done) ->
@@ -58,32 +76,15 @@ describe 'User', ->
       .put("/users/#{user_id}")
       .send(UPDATED_DATA)
       .expect 200, (err, res) ->
-        res.body.should.include(UPDATED_DATA)
+        res.body.should.include(_.pick(UPDATED_DATA, "email"))
         done()
-        
-  it "should be persisted after update", (done) ->
+
+  it "should not be updated when email empty", (done) ->
     request(app)
-      .get("/users/#{user_id}")
-      .expect 200, (err, res) ->
-        res.body.should.include(UPDATED_DATA)
-        res.body.should.have.property "_id"
-        res.body["_id"].should.be.eql user_id
+      .put("/users/#{user_id}")
+      .send({email: ""})
+      .expect 422, (err, res) ->
+        res.body.errors.should.include {type: FN.user_email_not_blank[CONFIG.notice], resource: "user", path: "email"}
         done()
-  
-  it "should be removed", (done) ->
-    request(app)
-      .del("/users/#{user_id}")
-      .expect 200, (err, res) ->
-        done()
-    
-  it "should not be listed after remove", (done) ->
-    request(app)
-      .get("/users")
-      .set("Accept", "application/json")
-      .expect 200, (err, res) ->
-        res.body.should.be.an.instanceof Array
-        res.body.should.have.length 0
-        done()
-        
+
   after cleanDB
-      

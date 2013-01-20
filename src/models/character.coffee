@@ -1,7 +1,7 @@
 class Character extends MongoBase
   @schema = @Schema(
+    nick_name : String
     user: { type : Schema.ObjectId, ref : 'User'}
-    name : String
     gender : { type : String, enum: ['Male', 'Female']}
     job : String
     level : Number

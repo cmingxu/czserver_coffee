@@ -1,7 +1,7 @@
 request = require 'supertest'
 
 Token = require process.cwd() + '/.app/models/token'
-Uniquser = require process.cwd() + '/.app/models/uniquser'
+User = require process.cwd() + '/.app/models/user'
 app = require process.cwd() + '/.app'
 
 
@@ -12,7 +12,7 @@ INITIAL_DATA = {
 
 
 insertUU = (done) ->
-  uu = new Uniquser(INITIAL_DATA)
+  uu = new User(INITIAL_DATA)
   uu.save (err, res)->
     done() unless err
 
