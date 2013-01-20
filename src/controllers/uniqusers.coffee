@@ -14,14 +14,14 @@ module.exports =
       
   # Creates new uniquser with data from `req.body`
   create: (req, res) ->
-    console.log req.body
     uniquser = new Uniquser req.body
     uniquser.save (err, uniquser) ->
       if not err
         res.send uniquser
         res.statusCode = 201
       else
-        res.send err
+        res.send ErrorHelper.toFormattedError("uniquser", err)
+        res.statusCode = 422
         
   # Gets uniquser by id
   show: (req, res) ->
@@ -33,11 +33,17 @@ module.exports =
              
   # Updates uniquser with data from `req.body`
   update: (req, res) ->
-    Uniquser.findByIdAndUpdate req.params.uniquser, {"$set":req.body}, (err, uniquser) ->
+    Uniquser.findById req.params.uniquser, (err, uniquser) ->
       if not err
-        res.send uniquser
+        _.extend(uniquser, req.body)
+        uniquser.save (err, uniquser)->
+          if not err
+            res.send uniquser
+          else
+            res.send ErrorHelper.toFormattedError("uniquser", err)
+            res.statusCode = 422
       else
-        res.send err
+        res.statusCode = 404
     
   # Deletes uniquser by id
   delete: (req, res) ->

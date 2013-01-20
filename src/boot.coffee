@@ -6,3 +6,4 @@ global.Schema    = MongoBase.Schema
 global._  = require 'underscore'
 global.GAME_CONFIG = require "#{ROOT}/models/game_config"
 global.FN = require("#{ROOT}/config/format_notice")
+global.ErrorHelper = require("#{ROOT}/helpers/error_helper")

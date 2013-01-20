@@ -18,9 +18,9 @@ class Token
           #save token in redis
           callback null, {token: token}
         else
-          callback {message: "", result: "password not valid"}, null
+          callback ErrorHelper.toMongooseError("password", FN.token_password_not_correct[CONFIG.notice]), null
       else
-          callback {message: "", result: "email not exist"}, null
+          callback ErrorHelper.toMongooseError("email",  FN.token_email_not_exist[CONFIG.notice]), null
 
   @remove: (conditions, callback)->
     callback()

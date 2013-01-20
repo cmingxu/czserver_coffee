@@ -11,14 +11,18 @@ INITIAL_DATA = {
 }
 
 
-cleanDB = (done) ->
+insertUU = (done) ->
   uu = new Uniquser(INITIAL_DATA)
+  uu.save (err, res)->
+    done() unless err
 
+
+cleanDB = (done) ->
   Token.remove {}, ->
     done()
 
 describe 'Token', ->
-  before cleanDB
+  before insertUU
   
   token_id = null
       

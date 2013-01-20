@@ -24,7 +24,8 @@ module.exports =
         res.send <%=: name %>
         res.statusCode = 201
       else
-        res.send err
+        res.send ErrorHelper.toFormattedError(<%=: name %>, err)
+        res.statusCode = 422
         
   # Gets <%=: name %> by id
   show: (req, res) ->
@@ -36,11 +37,17 @@ module.exports =
              
   # Updates <%=: name %> with data from `req.body`
   update: (req, res) ->
-    <%=: name | capitalize %>.findByIdAndUpdate req.params.<%=: name %>, {"$set":req.body}, (err, <%=: name %>) ->
+    <%=: name | capitalize %>.findById req.params.<%=: name %>, (err, <%=: name %>) ->
       if not err
-        res.send <%=: name %>
+        _.extend(<%=: name %>, req.body)
+        <%=: name %>.save(err, <%=: name %>) ->
+          if not err
+            res.send <%=: name %> 
+          else
+            res.send ErrorHelper.toFormattedError("<%=: name %>", err)
+            res.statusCode = 422
       else
-        res.send err
+        res.statusCode = 404
     
   # Deletes <%=: name %> by id
   destroy: (req, res) ->
