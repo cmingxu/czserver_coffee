@@ -1,3 +1,8 @@
 1, user create / update / destroy
 2, user login / logout [everyauth|plain password]
 3, reimplement existing api
+
+1, 装个public的server app.108km.com www @@@w@@@@
+2, login required
+3, token 登陆后返回角色信息
+

@@ -13,7 +13,7 @@ module.exports =
     user = new User
       
   # Creates new user with data from `req.body`
-  # should be logged in here
+  #TODO should be logged in here
   create: (req, res) ->
     user = new User req.body
     user.save (err, user) ->
