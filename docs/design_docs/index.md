@@ -9,13 +9,12 @@ by 108km.com
 
 - 2013-01-07   Waigo    Initial version.
 - 2013-01-07   Waigo    增加各个系统文档初稿.ToDo….
-
+- 2013-01-20   Waigo    删除UniqUsers逻辑。简化用户系统。
 
 # 目录 #
 
 ---------------------------------------------------------------------
 
-- [统一用户登录系统 UniqUsers System](./uniq_users.md) 
 - [用户系统 Users System](./users.md)
 - [角色系统 Characters System](./characters.md) 
 - [物品与装备系统 Props System](./props.md) 
@@ -33,6 +32,7 @@ by 108km.com
 类似Battle Heart + 植物大战僵尸玩法。 
 
 玩家控制1个角色，点击屏幕空白处移动，自动攻击敌人。 
+在任务场景，玩家可以左右移动
 在战斗场景，屏幕顶部会出现最多4个造塔的图标，点击拖拽该图标到场景的塔基上可以造塔。 
 
 造塔： 
