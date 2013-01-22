@@ -8,7 +8,7 @@ login_required = (req, res, next)->
       next()
     else
       res.statusCode = 401
-      res.end()
+      res.end('{"error": "no authorization"}')
 
 
 

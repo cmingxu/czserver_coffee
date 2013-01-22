@@ -16,12 +16,25 @@ UPDATED_DATA = {
   "password": "123"
 }
 
+token = null
 cleanDB = (done) ->
-  User.remove {}, ->
-    done()
+  authentications = {email: "cming.xu@gmail.com", password: "123"}
+  uu = new User(authentications)
+  User.remove {}, (err, affectRow)->
+    if not err
+      uu.save (err, uu) ->
+        if not err
+          request(app)
+          .post("/tokens")
+          .send(authentications)
+          .expect 201, (err, res) ->
+            res.body.token.should.match /\w{12,}/
+            token = res.body.token
+            done()
+
 
 describe 'User', ->
-  before cleanDB, H.fakeLogin
+  before cleanDB
   
   user_id = null
       
@@ -71,6 +84,7 @@ describe 'User', ->
   it "should be accessible by id", (done) ->
     request(app)
       .get("/users/#{user_id}")
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         res.body.should.include(_.pick(INITIAL_DATA, "email"))
         res.body.should.have.property "_id"
@@ -83,13 +97,12 @@ describe 'User', ->
       .set("Accept", "application/json")
       .expect 200, (err, res) ->
         res.body.should.be.an.instanceof Array
-        res.body.should.have.length 1
-        res.body[0].should.include(_.pick(INITIAL_DATA, "email"))
         done()
     
   it "should be updated", (done) ->
     request(app)
       .put("/users/#{user_id}")
+      .set("Auth-Token", token)
       .send(UPDATED_DATA)
       .expect 200, (err, res) ->
         res.body.should.include(_.pick(UPDATED_DATA, "email"))
@@ -98,6 +111,7 @@ describe 'User', ->
   it "should not be updated when email empty", (done) ->
     request(app)
       .put("/users/#{user_id}")
+      .set("Auth-Token", token)
       .send({email: ""})
       .expect 422, (err, res) ->
         res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}

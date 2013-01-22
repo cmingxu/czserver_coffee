@@ -25,7 +25,6 @@ class Token
 
   @loginWithToken: (token, callback)->
     redis_client.hgetall token, (err, result)->
-      console.log result
       if err
         callback err, null
       else

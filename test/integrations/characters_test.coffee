@@ -53,6 +53,7 @@ describe 'Character', ->
   it "should be accessible by id", (done) ->
     request(app)
       .get("/characters/#{character_id}")
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         res.body.should.include(INITIAL_DATA)
         res.body.should.have.property "_id"
@@ -62,6 +63,7 @@ describe 'Character', ->
   it "should be listed in list", (done) ->
     request(app)
       .get("/characters")
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         res.body.should.be.an.instanceof Array
         res.body.should.have.length 1
@@ -72,6 +74,7 @@ describe 'Character', ->
     request(app)
       .put("/characters/#{character_id}")
       .send(UPDATED_DATA)
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         res.body.should.include(UPDATED_DATA)
         done()
@@ -79,6 +82,7 @@ describe 'Character', ->
   it "should be persisted after update", (done) ->
     request(app)
       .get("/characters/#{character_id}")
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         res.body.should.include(UPDATED_DATA)
         res.body.should.have.property "_id"
@@ -88,12 +92,14 @@ describe 'Character', ->
   it "should be removed", (done) ->
     request(app)
       .del("/characters/#{character_id}")
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         done()
     
   it "should not be listed after remove", (done) ->
     request(app)
       .get("/characters")
+      .set("Auth-Token", token)
       .expect 200, (err, res) ->
         res.body.should.be.an.instanceof Array
         res.body.should.have.length 0
