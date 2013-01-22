@@ -40,9 +40,10 @@ curl -H "accept: application/json"  -H "Content-Type: application/json" -d '{"em
 ### 登录
 
 ```
-curl -H "accept: application/json"  -H "Content-Type: application/json"
--d '{"email": "cming.xu123@gmail.com", "first_name": "ac", "last_server": "aaa", "password": "123"}'
-http://localhost:3000/uniqusers  -X POST -v
+curl -H "accept: application/json"  -H "Content-Type: application/json" -d '{"email": "cming.xu123@gmail.com", "first_name": "ac", "last_server": "aaa", "password": "123"}' http://localhost:3000/uniqusers  -X POST -v
 ```
 
 
+```
+  curl localhost:3000/tokens -X POST -H "accept: application/json" -H "content-tpe: application/json" -d '{"email": "cming.xu@gmail.com", "password": "123"}'
+```

@@ -9,12 +9,12 @@ class Token
 
   save: (callback)->
     self = this
-    User.findOne {email: self.email}, "", (err, uu)->
+    User.findOne {email: this.email}, "", (err, uu)->
       if uu
         if uu.password_correct(self.password)
           token = new Buffer(uu._id + "/" + ((new Date()).valueOf()), "utf8").toString("base64")
-          #save token in redis
-          callback null, {token: token, hasCharacter: false}
+          redis_client.hmset token, {user_id: uu._id.toString()}, (err)->
+            callback null, {token: token, hasCharacter: false}
         else
           callback ErrorHelper.toMongooseError("password", FN.token_password_not_correct[CONFIG.notice]), null
       else
@@ -23,17 +23,18 @@ class Token
   @remove: (conditions, callback)->
     callback()
 
-  @loginWithToken: (req, callback)->
-    try
-      token = new Buffer(req.get("Auth-Token"), "base64").toString("utf8")
-      user_id = token.split("/")[0]
-      token_created_at = token.split("/")[1]
-    catch e
-      callback e, null
-    
-
-    User.findOne {id: user_id}, (err, user)->
-      callback err, user
+  @loginWithToken: (token, callback)->
+    redis_client.hgetall token, (err, result)->
+      console.log result
+      if err
+        callback err, null
+      else
+        if result && result.user_id
+          User.findOne {_id: result.user_id}, "", (err, user)->
+            callback err, user
+        else
+          callback {}, null
+          
 
 
 

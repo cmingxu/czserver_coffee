@@ -13,8 +13,8 @@
 2. 客户端要做是否为空的检测。服务端做Email是否存在等检测，如果发生错误，返回`422`信息???。客户端必须接收错误信息并且用`MsgBox`显示错误提示。
 
 3. 注册成功后，返回注册成功的信息 `201`，服务端自动进行登陆，返回`token`给客户端
-4. 此时character应该不存在， 客户端拿到`token`后，下一个请求应该是 `GET: /characters`的create
-4. 之后的每次操作，都在`Header`里放入`token`
+4. 此时character应该不存在， 客户端拿到`token`后，下一个请求应该是 `POST: /characters`的create
+4. 之后的每次操作，都在`Header`里放入`Auth-Token: token`
 
 ** 用户登陆 **
 
@@ -24,7 +24,8 @@
 4. 客户端接收到登录成功的返回值后，再次访问`bootstrap`的API来获取当前玩家的所有基本信息。
 
 
-		注：每次登录如果没有character告诉客户端character不存在。客户端需要请求 `GET: /characters`的create 来创建角色信息。
+		注：每次登录如果没有character告诉客户端character不存在。客户端需要请求
+`POST: /characters`的create 来创建角色信息。
 
 
 ------------------------------------------------------------------

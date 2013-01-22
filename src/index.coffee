@@ -27,7 +27,7 @@ app.use everyauth.middleware()
 
 app.use (err, req, res, next)->
   console.error(err.stack)
-  res.send(500, 'Something broke!')
+  res.send(500, {error: "server error"})
  
 app.set 'view engine', 'jade'
 

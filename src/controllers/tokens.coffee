@@ -25,6 +25,7 @@ module.exports =
         res.statusCode = 201
       else
         res.send err
+        res.statusCode = 422
         
   # Gets token by id
   show: (req, res) ->

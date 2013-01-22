@@ -1,3 +1,4 @@
+redis = require 'redis'
 global.ROOT = process.cwd() + "/.app"
 global.PROCESS_ENV = process.env.NODE_ENV  || "dev"
 global.CONFIG = require "#{ROOT}/config/#{PROCESS_ENV}"
@@ -7,3 +8,4 @@ global._  = require 'underscore'
 global.GAME_CONFIG = require "#{ROOT}/models/game_config"
 global.FN = require("#{ROOT}/config/format_notice")
 global.ErrorHelper = require("#{ROOT}/helpers/error_helper")
+global.redis_client = redis.createClient()
