@@ -5,35 +5,28 @@ class Character extends MongoBase
     gender : { type : String, enum: ['Male', 'Female']}
     job : String
     level : Number
-    HP : Number
-    HP_max : Number
-    MP : Number
-    MP_max : Number
-    HP_incSpeed : Number
-    MP_incSpeed : Number
-    ATK : Number
-    DEF : Number
+    hp : Number
+    max_hp : Number
+    mp : Number
+    max_mp : Number
+    hp_inc_speed : Number
+    mp_inc_speed : Number
+    attack : Number
+    defense : Number
 
     addedPropeties: {
-      addedHP_max : Number
-      addedMP_max : Number
-      addedATK : Number
-      addedDEF : Number
+      added_hp_max : Number
+      added_mp_max : Number
+      added_attack : Number
+      added_defense : Number
     }
 
-    isDead : Boolean
+    is_dead : Boolean
     union_id : { type : Schema.ObjectId, ref: 'Union'}
 
     created_at: { type : Date, default : Date.now }
     updated_at: { type : Date, default : Date.now }
   )
-
-  @schema.methods.abc = ()->
-    console.log 'hahah'
-
-  @schema.statics.findByName = (name, cb) ->
-    this.find({ name: new RegExp(name, 'i') }, cb)
-
 
 
 module.exports = Character.initialize()

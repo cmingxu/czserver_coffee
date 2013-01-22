@@ -14,23 +14,24 @@ module.exports =
       
   # Creates new character with data from `req.body`
   create: (req, res) ->
-    character = new Character req.body
+    character = new Character _.extend(req.body, {user_id: req.user._id})
     character.save (err, character) ->
       if not err
         res.send character
         res.statusCode = 201
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
         
   # Gets character by 
   show: (req, res) ->
     Character.findById req.params.character, (err, character) ->
       if not err
+        console.log character
         res.send character
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
              
   # Updates character with data from `req.body`
   update: (req, res) ->

@@ -35,6 +35,7 @@ email_uniq_validator = (email, callback)->
   Uu.findOne(email: email).exec (err, uu)->
     if uu then callback(false) else callback(true)
 User.schema.path('email').validate email_uniq_validator, FN.user_email_should_be_uniq[CONFIG.notice]
+User.schema.path('hashed_password').validate User.validation({message: FN.user_password_should_not_blank[CONFIG.notice]}, "notEmpty")
 
 # virtual attributes
 User.schema.virtual('password').set((password)->
@@ -46,7 +47,6 @@ User.schema.virtual('password').set((password)->
     this.hashed_password = ""
 )
 
-User.schema.path('hashed_password').validate User.validation({message: FN.user_password_should_not_blank[CONFIG.notice]}, "notEmpty")
 
 # pre, in case no password email passed in
 User.schema.pre 'validate', (next)->
