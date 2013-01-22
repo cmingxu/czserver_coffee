@@ -1,5 +1,5 @@
 request = require 'supertest'
-require "../test_helper"
+H = require "../test_helper"
 charlatan = require 'charlatan'
 
 User = require process.cwd() + '/.app/models/user'
@@ -21,7 +21,7 @@ cleanDB = (done) ->
     done()
 
 describe 'User', ->
-  before cleanDB
+  before cleanDB, H.fakeLogin
   
   user_id = null
       
@@ -49,7 +49,7 @@ describe 'User', ->
       .post("/users")
       .send({email: ""})
       .expect 422, (err, res) ->
-        res.body.errors.should.include {type: FN.user_email_not_blank[CONFIG.notice], resource: "user", path: "email"}
+        res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}
         done()
         
   it "should be accessible by id", (done) ->
@@ -84,7 +84,7 @@ describe 'User', ->
       .put("/users/#{user_id}")
       .send({email: ""})
       .expect 422, (err, res) ->
-        res.body.errors.should.include {type: FN.user_email_not_blank[CONFIG.notice], resource: "user", path: "email"}
+        res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}
         done()
 
   after cleanDB

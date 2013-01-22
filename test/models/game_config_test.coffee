@@ -5,7 +5,7 @@ _ = require 'underscore'
 beforeHook = (done) ->
   done()
 
-describe "Game Config", ->
+describe "Game Config Model", ->
   before beforeHook
   it "should be contains good config", ->
     _.keys(GameConfig).should.include "goods"

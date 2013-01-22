@@ -4,6 +4,6 @@ require "../test_helper"
 beforeHook = (done) ->
   done()
 
-describe "Charprop", ->
+describe "Charprop Model", ->
   before beforeHook
   it "should create new charprop", ->

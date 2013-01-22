@@ -4,6 +4,6 @@ require "../test_helper"
 beforeHook = (done) ->
   done()
 
-describe "Chartower", ->
+describe "Chartower Model", ->
   before beforeHook
   it "should create new chartower", ->

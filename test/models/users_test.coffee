@@ -9,7 +9,7 @@ afterHook = (done) ->
   User.remove({}, (err)-> done() unless err)
 
 
-describe " validation ", ->
+describe "User validation ", ->
   beforeEach beforeHook
   afterEach afterHook
   it "email should valid format", (done)->
@@ -23,15 +23,8 @@ describe " validation ", ->
     @uu.email = ""
     @uu.save (err)->
       if err
-        err.errors.email.should.include {type: FN.user_email_not_blank[CONFIG.notice]}
+        err.errors.email.should.include {type: FN.user_email_not_valid[CONFIG.notice]}
         done()
-
-  # it "first name should not be blank", (done)->
-  #   @uu.first_name = ""
-  #   @uu.save (err)->
-  #     if err
-  #       err.errors.first_name.should.include {type: FN.user_first_name_not_blank[CONFIG.notice]}
-  #       done()
 
   it "email should be uniq", (done)->
     self = this
@@ -49,4 +42,6 @@ describe " validation ", ->
           crypto = require 'crypto'
           if uu[0].hashed_password == crypto.createHash("sha1").update(uu[0].salt + "/" + "123").digest("hex")
             done()
+
+
 

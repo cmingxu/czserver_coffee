@@ -4,6 +4,6 @@ require "../test_helper"
 beforeHook = (done) ->
   done()
 
-describe "Character", ->
+describe "Character Model", ->
   before beforeHook
   it "should create new character", ->

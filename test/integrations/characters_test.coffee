@@ -1,5 +1,5 @@
 request = require 'supertest'
-require "../test_helper"
+H = require "../test_helper"
 
 Character = require process.cwd() + '/.app/models/character'
 app = require process.cwd() + '/.app'
@@ -18,7 +18,7 @@ cleanDB = (done) ->
     done()
 
 describe 'Character', ->
-  before cleanDB
+  before cleanDB, H.fakeLogin
   
   character_id = null
       

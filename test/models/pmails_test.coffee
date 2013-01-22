@@ -4,6 +4,6 @@ require "../test_helper"
 beforeHook = (done) ->
   done()
 
-describe "Pmail", ->
+describe "Pmail Model", ->
   before beforeHook
   it "should create new pmail", ->

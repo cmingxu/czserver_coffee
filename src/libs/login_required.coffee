@@ -1,6 +1,15 @@
+skip_white_list = ["/tokens", "/users"]
+
 login_required = (req, res, next)->
-  console.log req.headers
-  next()
+  if _.include(skip_white_list, req.url)
+    next()
+  else
+    if req.session.logged_in
+      next()
+    else
+      res.statusCode = 401
+      res.end()
+
 
 
 module.exports = login_required

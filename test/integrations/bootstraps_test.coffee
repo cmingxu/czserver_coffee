@@ -5,9 +5,7 @@ app = require process.cwd() + '/.app'
 
 
 cleanDB = (done) ->
+  done()
 
-describe 'Character', ->
-  before cleanDB
+describe 'bootstrap ', ->
   
-  character_id = null
-  it "should be created", (done) ->

@@ -2,7 +2,7 @@ crypto = require 'crypto'
 
 class User extends MongoBase
   @schema = @Schema(
-    email : {type: String, validate: [@validation({message: FN.user_email_not_blank[CONFIG.notice]}, "notEmpty"), @validation({passIfEmpty: true, message: FN.user_email_not_valid[CONFIG.notice]}, "isEmail")]}
+    email : String
     hashed_password : String
     salt :  String
     real_name : String
@@ -27,17 +27,29 @@ class User extends MongoBase
 Uu = User.initialize()
 module.exports = Uu
 
+# validations 
+User.schema.path('email').validate User.validation({message: FN.user_email_not_valid[CONFIG.notice]}, "isEmail")
+User.schema.path('email').validate User.validation({message: FN.user_email_not_valid[CONFIG.notice]}, "notNull")
+
 email_uniq_validator = (email, callback)->
   Uu.findOne(email: email).exec (err, uu)->
     if uu then callback(false) else callback(true)
-
 User.schema.path('email').validate email_uniq_validator, FN.user_email_should_be_uniq[CONFIG.notice]
 
+# virtual attributes
 User.schema.virtual('password').set((password)->
-  this.salt = crypto.randomBytes(16).toString('base64').replace(/\//g,'_').replace(/\+/g,'-')
-  this.hashed_password =  crypto.createHash('sha1').update(this.salt + "/" + password).digest("hex")
+  if password && password.length
+    this.salt = crypto.randomBytes(16).toString('base64').replace(/\//g,'_').replace(/\+/g,'-')
+    this.hashed_password =  crypto.createHash('sha1').update(this.salt + "/" + password).digest("hex")
 )
 
+User.schema.path('hashed_password').validate User.validation({message: FN.user_password_should_not_blank[CONFIG.notice]}, "notEmpty")
+
+# pre, in case no password email passed in
+User.schema.pre 'validate', (next)->
+  this.email ||= ""
+  this.password ||= ""
+  next()
 
 
 
