@@ -21,7 +21,6 @@ describe "Token Model", ->
   it "should create new token", (done)->
     t = new Token({email: "cming.xu@gmail.com", password: "123"})
     t.save (err, token)->
-      token.token.should.eql new Buffer(user.id + "/" + ((new Date()).valueOf()), "utf8").toString("base64")
       token.hasCharacter.should.be.false
       done()
 

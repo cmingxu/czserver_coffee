@@ -44,12 +44,28 @@ describe 'User', ->
         res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}
         done()
         
-  it "should not be created when email emapty", (done) ->
+  it "should not be created when email empty", (done) ->
     request(app)
       .post("/users")
       .send({email: ""})
       .expect 422, (err, res) ->
         res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}
+        done()
+
+  it "should not be created when email not defined", (done) ->
+    request(app)
+      .post("/users")
+      .send({})
+      .expect 422, (err, res) ->
+        res.body.errors.should.include {type: FN.user_email_not_valid[CONFIG.notice], resource: "user", path: "email"}
+        done()
+
+  it "should not be created when password not defined", (done) ->
+    request(app)
+      .post("/users")
+      .send({email: "abc@abc.abc"})
+      .expect 422, (err, res) ->
+        res.body.errors.should.include {type: FN.user_password_should_not_blank[CONFIG.notice], resource: "user", path: "hashed_password"}
         done()
         
   it "should be accessible by id", (done) ->

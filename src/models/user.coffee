@@ -38,9 +38,13 @@ User.schema.path('email').validate email_uniq_validator, FN.user_email_should_be
 
 # virtual attributes
 User.schema.virtual('password').set((password)->
+  console.log 'password' + password
   if password && password.length
     this.salt = crypto.randomBytes(16).toString('base64').replace(/\//g,'_').replace(/\+/g,'-')
     this.hashed_password =  crypto.createHash('sha1').update(this.salt + "/" + password).digest("hex")
+  else
+    this.salt = ""
+    this.hashed_password = ""
 )
 
 User.schema.path('hashed_password').validate User.validation({message: FN.user_password_should_not_blank[CONFIG.notice]}, "notEmpty")
@@ -49,6 +53,8 @@ User.schema.path('hashed_password').validate User.validation({message: FN.user_p
 User.schema.pre 'validate', (next)->
   this.email ||= ""
   this.password ||= ""
+  this.hashed_password ||= ""
+  this.salt ||= ""
   next()
 
 
