@@ -38,7 +38,6 @@ User.schema.path('email').validate email_uniq_validator, FN.user_email_should_be
 
 # virtual attributes
 User.schema.virtual('password').set((password)->
-  console.log 'password' + password
   if password && password.length
     this.salt = crypto.randomBytes(16).toString('base64').replace(/\//g,'_').replace(/\+/g,'-')
     this.hashed_password =  crypto.createHash('sha1').update(this.salt + "/" + password).digest("hex")
