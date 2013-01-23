@@ -8,4 +8,5 @@ cleanDB = (done) ->
   done()
 
 describe 'bootstrap ', ->
+  it "should get index", ->
   

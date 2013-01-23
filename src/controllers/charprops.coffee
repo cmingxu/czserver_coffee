@@ -21,7 +21,7 @@ module.exports =
         res.statusCode = 201
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
         
   # Gets charprop by id
   show: (req, res) ->
@@ -30,7 +30,7 @@ module.exports =
         res.send charprop
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
              
   # Updates charprop with data from `req.body`
   update: (req, res) ->
@@ -39,7 +39,7 @@ module.exports =
         res.send charprop
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
     
   # Deletes charprop by id
   destroy: (req, res) ->
@@ -48,6 +48,6 @@ module.exports =
         res.send {}
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
       
   

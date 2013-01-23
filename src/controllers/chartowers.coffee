@@ -1,7 +1,7 @@
 Chartower = require '../models/chartower'
 
 # Chartower model's CRUD controller.
-module.exports = 
+module.exports =
 
   # Lists all chartowers
   index: (req, res) ->
@@ -21,7 +21,7 @@ module.exports =
         res.statusCode = 201
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
         
   # Gets chartower by id
   show: (req, res) ->
@@ -30,7 +30,7 @@ module.exports =
         res.send chartower
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
              
   # Updates chartower with data from `req.body`
   update: (req, res) ->
@@ -39,7 +39,7 @@ module.exports =
         res.send chartower
       else
         res.send err
-        res.statusCode = 500
+        res.statusCode = 422
     
   # Deletes chartower by id
   destroy: (req, res) ->
@@ -48,6 +48,4 @@ module.exports =
         res.send {}
       else
         res.send err
-        res.statusCode = 500
-      
-  
+        res.statusCode = 422
