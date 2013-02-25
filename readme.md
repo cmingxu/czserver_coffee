@@ -80,7 +80,13 @@
     `cake --name czserver_test drop`
 
   - 如何创建一个UniqUser
-    ```
-      curl -H "accept: application/json"  -H "Content-Type: application/json" -d '{"email": "cming.xu@gmail.com", "first_name": "ac", "last_server": "aaa"}' http://localhost:3000/uniqusers  -X POST
 
+    ```
+      curl -H "accept: application/json"  -H "Content-Type: application/json" -d '{"email": "cming.xu@gmail.com", "password": "abc", first_name": "ac", "last_server": "aaa"}' http://localhost:3000/uniqusers  -X POST
+
+    ```
+
+
+    ```
+    curl -H "accept: application/json"  -H "Content-Type: application/json" -d '{"email": "cming@gmail.com", "password": "abc", first_name": "ac", "last_server": "aaa"}' http://localhost:3000/uniqusers  -X POST
     ```
