@@ -9,7 +9,7 @@ class Token
 
   save: (callback)->
     self = this
-    User.findOne {email: this.email}, "", (err, uu)->
+    User.findOne {email: self.email}, "", (err, uu)->
       if uu
         if uu.password_correct(self.password)
           token = new Buffer(uu._id + "/" + ((new Date()).valueOf()), "utf8").toString("base64")
