@@ -33,6 +33,7 @@ app.set 'view engine', 'jade'
 
 app.use express.bodyParser()
 app.use require "#{ROOT}/libs/login_from_token"
+app.use require "#{ROOT}/libs/login_from_cookie"
 app.use require "#{ROOT}/libs/login_required"
 
 
