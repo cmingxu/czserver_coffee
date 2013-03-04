@@ -17,5 +17,5 @@ module.exports  = (app) ->
   app.get("/admin",       require("#{ROOT}/controllers/users").index)
   app.get("/admin/users", require("#{ROOT}/controllers/users").index)
   app.get("/login",       require("#{ROOT}/controllers/admins").login)
-  app.post("/login",      require("#{ROOT}/controllers/admins").login)
+  app.post("/admin/do_login",      require("#{ROOT}/controllers/admins").login)
 

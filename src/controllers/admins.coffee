@@ -7,13 +7,15 @@ module.exports =
     if req.method == "GET"
       res.render("admins/login")
     else
-      User.findOne {email: req.body.login}, "", (err, uu)->
+      Admin.findOne {email: req.body.email}, "", (err, uu)->
         if uu
           if uu.password_correct(req.body.password)
             req.logged_in = true
-            req.session.user = uu
+            res.redirect_to("admins/users")
           else
+            res.statusCode = 401
             res.render("admins/login", {"field": "password", "message": "password not correct"})
         else
+          res.statusCode = 401
           res.render("admins/login", {"field": "email", "message": "login / email not exists"})
 

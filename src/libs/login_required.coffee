@@ -1,4 +1,4 @@
-skip_white_list = ["/tokens", "/users", "/login"]
+skip_white_list = ["/tokens", "/users", "/login", "/admin/do_login"]
 
 login_required = (req, res, next)->
   if _.include(skip_white_list, req.url)
