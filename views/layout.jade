@@ -16,9 +16,30 @@ head
   != css('app')
   
 body
-  include widgets/header
-  block content
-  include widgets/foot
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        a.band
+        .nav-collapse
+          ul.nav
+            li
+              a(href="/admin/users") 用户列表
+            li.pull-right
+              a(href="/logout") 退出系统
+
+
+  .container-fluid
+    .container
+      .span2
+      .span10
+        block content
+
+  footer
+    .container
+      p 
+        a(href="") 108km公司 |
+        a(href="") 108km公司 |
+        a(href="") 108km公司 
 
   block javascripts
   != js('app')
