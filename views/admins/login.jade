@@ -1,4 +1,7 @@
 extend ../layout
 
 block content
-  h1 abc
+  form(action="/admin/login")
+    input(name="email")
+    input(name="password")
+    button("提交")

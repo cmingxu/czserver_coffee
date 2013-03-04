@@ -163,3 +163,13 @@ task 'export_config', '', (options) ->
     console.log 'Done'
     process.exit(0)
 
+option "-l", "--email [Email]", "email"
+option "-p", "--password [Password]", "password"
+task 'generate_account', '', (options) ->
+  app = require('./.app')
+  Admin = require './.app/models/admin'
+  u = new Admin({login: options.email, password: options.password})
+  u.save (err, o) -> 
+    console.log 'Account Inserting Success...' if o
+    process.exit(0)
+

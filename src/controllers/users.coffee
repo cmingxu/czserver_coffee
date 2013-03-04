@@ -6,7 +6,11 @@ module.exports =
   # Lists all users
   index: (req, res) ->
     User.find {}, (err, users) ->
-      res.send users
+      if err
+        req.statusCode = 404
+        req.send {}
+      else
+        res.send users
 
   # new user 
   new: (req, res) ->

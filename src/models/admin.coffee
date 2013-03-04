@@ -1,3 +1,5 @@
+crypto = require 'crypto'
+
 class Admin extends MongoBase
   @schema = @Schema(
     login: String
@@ -8,6 +10,7 @@ class Admin extends MongoBase
 
 admin = Admin.initialize()
 
+# TODO
 # virtual attributes
 Admin.schema.virtual('password').set((password)->
   if password && password.length
