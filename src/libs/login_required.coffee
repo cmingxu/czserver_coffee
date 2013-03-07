@@ -8,7 +8,11 @@ login_required = (req, res, next)->
       next()
     else
       res.statusCode = 401
-      res.end('{"error": "no authorization"}')
+      if req.is("json")
+        res.end('{"error": "no authorization"}')
+      else
+        req.flash("info", "you just access limited resource, login required")
+        res.redirect("/login")
 
 
 

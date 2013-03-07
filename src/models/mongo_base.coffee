@@ -6,7 +6,9 @@ class MongoBase
   @connection = null
   @validation  = validator.validate
   @connect: ()->
-    @connection = mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}"
+      @connection = mongoose.connect "mongodb://#{CONFIG.mongo_host}/#{CONFIG.mongo_name}", (err) ->
+        console.log '[ERROR] connecting to mongodb issue'
+        process.exit(0) if err
 
 
   @initialize: ()->

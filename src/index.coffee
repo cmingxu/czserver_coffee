@@ -4,6 +4,7 @@ Resource = require 'express-resource'
 stylus = require 'stylus'
 assets = require 'connect-assets'
 everyauth = require 'everyauth'
+flash  = require 'connect-flash'
 MongoBase.connect()
 
 app = express()
@@ -22,6 +23,7 @@ app.use express.methodOverride()
 app.use express.cookieParser()
 app.use express.responseTime()
 app.use express.session({ secret: 'czserver_coffee'})
+app.use flash()
 
 app.use everyauth.middleware()
 
@@ -35,6 +37,7 @@ app.use express.bodyParser()
 app.use require "#{ROOT}/libs/login_from_token"
 app.use require "#{ROOT}/libs/login_from_cookie"
 app.use require "#{ROOT}/libs/login_required"
+
 
 
 routes = require './routes'
