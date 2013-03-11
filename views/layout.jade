@@ -9,6 +9,8 @@ head
   meta(name='author', content='')
   // Mobile Specific
   meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  title
+    = title || "Server"  
 
   block stylesheets
   != css('bootstrap.min')

@@ -5,6 +5,7 @@ login_required = (req, res, next)->
     next()
   else
     if req.logged_in
+      req.locals['user'] = req.user
       next()
     else
       res.statusCode = 401

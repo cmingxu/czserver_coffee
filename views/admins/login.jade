@@ -5,14 +5,14 @@ block content
     fieldset
       legend 登录
       .control-group
-        label.control-label(for="email") Email
+        label.control-label(for="email") 邮箱
         .controls
-          input(name="email", type='input')
+          input(name="email", type='text', placeholder="email@example.com")
 
       .control-group
-        label.control-label(for="password") Password
+        label.control-label(for="password") 密码
         .controls
-          input(type='password', name="password")
+          input(type='password', name="password", placeholder="Password")
 
       .form-actions
         button(type='submit').btn.btn-primary 登录

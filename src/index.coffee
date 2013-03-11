@@ -27,6 +27,10 @@ app.use flash()
 
 app.use everyauth.middleware()
 
+app.use (req, res, next)->
+  res.locals.title ||= "CZSERVER"
+  next()
+
 app.use (err, req, res, next)->
   console.error(err.stack)
   res.send(500, {error: "server error"})
