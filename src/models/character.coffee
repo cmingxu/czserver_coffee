@@ -3,7 +3,7 @@ class Character extends MongoBase
     nick_name : String
     user: { type : Schema.ObjectId, ref : 'User'}
     gender : { type : String, enum: ['Male', 'Female']}
-    job : String
+    job : {type : String, enum: ['道士', '战士', '医师']}
     level : Number
     hp : Number
     max_hp : Number
@@ -28,8 +28,26 @@ class Character extends MongoBase
     updated_at: { type : Date, default : Date.now }
   )
 
+C = Character.initialize()
+module.exports = C
 
-module.exports = Character.initialize()
+# preinitialize
+C.schema.pre 'init', (doc)->
+  doc.user ||= null
+  doc.gender ||= ''
+  doc.job ||= ''
+
+# user should provided
+C.schema.path('user').validate Character.validation({message: FN.character_user_not_exist[CONFIG.notice]}, "notEmpty")
+
+# nick name not empty
+# C.schema.path('nick_name').validate Character.validation({message: FN.character_nick_name_empty[CONFIG.notice]}, "notEmpty")
+# nick name valid
+# nick_name_valid = (nick_name) -> return nick_name.test(/[\d|\w]{1,20}/i)
+# C.schema.path('nick_name').validate(nick_name_valid,  FN.character_nick_name_invalid[CONFIG.notice])
+
+
+
 
 
 #角色的基本属性： 

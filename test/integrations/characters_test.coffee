@@ -9,6 +9,7 @@ app = require process.cwd() + '/.app'
 
 INITIAL_DATA = {
   "nick_name":"Some Data"
+  "job": "道士"
 }
 
 UPDATED_DATA = {
