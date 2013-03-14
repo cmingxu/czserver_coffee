@@ -3,7 +3,7 @@ Token = require "#{ROOT}/models/token"
 login_from_token = (req, res, next)->
   if req.get('Auth-Token')
     Token.loginWithToken req.get('Auth-Token'), (err, user)->
-      if not err
+      if user
         req.logged_in = true
         req.user = user
         next()

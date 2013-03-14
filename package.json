@@ -22,6 +22,7 @@
     , "hiredis": "*"
     , "redis": "*"
     , "mkdirp": "*"
+    , "connect-flash": "*"
     , "redis" : "*"
     , "wrench": "1.4.4"
   }, "scripts": {
