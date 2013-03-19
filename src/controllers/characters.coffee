@@ -27,7 +27,6 @@ module.exports =
   show: (req, res) ->
     Character.findById req.params.character, (err, character) ->
       if not err
-        console.log character
         res.send character
       else
         res.send err

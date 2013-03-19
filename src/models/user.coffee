@@ -23,6 +23,8 @@ class User extends MongoBase
   @schema.methods.password_correct = (password)->
     this.hashed_password == crypto.createHash("sha1").update(this.salt + "/" + password).digest("hex")
 
+  @schema.method.load_prod
+
 
 Uu = User.initialize()
 module.exports = Uu

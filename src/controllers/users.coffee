@@ -15,6 +15,7 @@ module.exports =
   # new user 
   new: (req, res) ->
     user = new User
+    res.render "users/new"
       
   # Creates new user with data from `req.body`
   #TODO should be logged in here

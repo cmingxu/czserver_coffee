@@ -2,30 +2,28 @@ Token = require '../models/token'
 
 # Token model's CRUD controller.
 module.exports = 
-
-  # Lists all tokens
-  index: (req, res) ->
-    Token.find {}, (err, tokens) ->
-      res.format
-        html: ()->
-          res.render "tokens/index", tokens
-        json: ()->
-          res.send tokens
-
   # new token 
   new: (req, res) ->
-    token = new Token
+    res.render "tokens/new"
       
   # Creates new token with data from `req.body`
   create: (req, res) ->
     token = new Token req.body
     token.save (err, token) ->
       if not err
-        res.send token
+        result = token
         res.statusCode = 201
       else
-        res.send err
+        result = err
         res.statusCode = 422
+
+      res.format(
+        json: ()->
+          res.send token
+        html: ()->
+          res.redirect "tokens/new"
+      )
+
         
   # Gets token by id
   show: (req, res) ->

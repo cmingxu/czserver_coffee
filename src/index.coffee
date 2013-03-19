@@ -31,22 +31,22 @@ app.use (req, res, next)->
   res.locals.title ||= "CZSERVER"
   next()
 
-app.use (err, req, res, next)->
-  console.error(err.stack)
-  res.send(500, {error: "server error"})
  
 app.set 'view engine', 'jade'
 
 app.use express.bodyParser()
-app.use require "#{ROOT}/libs/login_from_token"
-app.use require "#{ROOT}/libs/login_from_cookie"
-app.use require "#{ROOT}/libs/login_required"
+#app.use require "#{ROOT}/libs/login_from_token"
+#app.use require "#{ROOT}/libs/login_from_cookie"
+#app.use require "#{ROOT}/libs/login_required"
 
 
 
 routes = require './routes'
 routes(app)
 
+app.use (err, req, res, next)->
+  console.error(err.stack)
+  res.send(500, {error: "server error"})
 
 module.exports = app
 

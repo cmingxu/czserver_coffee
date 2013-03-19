@@ -1,9 +1,10 @@
 extend ../layout
 
+
 block content
-  form.form-horizontal(action="/users", method="POST")
+  form.form-horizontal(action="/tokens", method="POST")
     fieldset
-      legend 注册
+      legend 登录
       .control-group
         label.control-label(for="login") 登录名
         .controls
@@ -13,11 +14,7 @@ block content
         label.control-label(for="password") 密码
         .controls
           input(type='password', name="password", placeholder="Password")
-      .control-group
-        label.control-label(for="password_confirmation") 密码
-        .controls
-          input(type='password', name="password_confirmation", placeholder="Password")
 
       .form-actions
-        button(type='submit').btn.btn-primary 注册
-        a(href='/tokens/new').btn 登录
+        button(type='submit').btn.btn-primary 登录
+        a(href='/users/new').btn 注册
