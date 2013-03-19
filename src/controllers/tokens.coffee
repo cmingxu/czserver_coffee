@@ -4,7 +4,7 @@ Token = require '../models/token'
 module.exports = 
   # new token 
   new: (req, res) ->
-    res.render "tokens/new"
+    res.render "tokens/new", {info: req.flash("info")}
       
   # Creates new token with data from `req.body`
   create: (req, res) ->
@@ -15,11 +15,12 @@ module.exports =
         res.statusCode = 201
       else
         result = err
+        req.flash "info", result
         res.statusCode = 422
 
       res.format(
         json: ()->
-          res.send token
+          res.send result
         html: ()->
           res.redirect "tokens/new"
       )

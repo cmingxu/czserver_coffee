@@ -1,20 +1,21 @@
 extend ../layout
 
 block content
+  
   form.form-horizontal(action="/users", method="POST")
     fieldset
       legend 注册
       .control-group
-        label.control-label(for="login") 登录名
+        label.control-label(for="email") EMail
         .controls
-          input(name="login", type='text', placeholder="login")
+          input(name="email", type='text', placeholder="email")
 
       .control-group
         label.control-label(for="password") 密码
         .controls
           input(type='password', name="password", placeholder="Password")
       .control-group
-        label.control-label(for="password_confirmation") 密码
+        label.control-label(for="password_confirmation") 确认密码
         .controls
           input(type='password', name="password_confirmation", placeholder="Password")
 

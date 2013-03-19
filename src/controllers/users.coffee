@@ -23,11 +23,20 @@ module.exports =
     user = new User req.body
     user.save (err, user) ->
       if not err
-        res.send user
+        result = user
         res.statusCode = 201
       else
-        res.send ErrorHelper.toFormattedError("user", err)
+        result =  ErrorHelper.toFormattedError("user", err)
+        req.flash "info", result
         res.statusCode = 422
+
+      res.format(
+        json: ()->
+          res.send result
+        html: ()->
+          res.redirect "users/new"
+      )
+
         
   # Gets user by id
   show: (req, res) ->
