@@ -10,7 +10,8 @@ module.exports =
 
   # new character 
   new: (req, res) ->
-    character = new Character
+    res.render "characters/new"
+    
       
   # Creates new character with data from `req.body`
   create: (req, res) ->

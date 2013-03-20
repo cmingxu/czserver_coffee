@@ -6,11 +6,15 @@ module.exports =
   # Lists all users
   index: (req, res) ->
     User.find {}, (err, users) ->
-      if err
-        req.statusCode = 404
-        req.send {}
-      else
-        res.send users
+      res.format
+        json: ()->
+          if err
+            res.statusCode = 404
+            res.send {}
+          else
+            res.send users
+        html: () ->
+          res.render "users/index", {users}
 
   # new user 
   new: (req, res) ->

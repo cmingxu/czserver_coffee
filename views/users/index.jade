@@ -1,0 +1,25 @@
+extend ../layout
+
+block content
+
+  table.table.table-striped
+    thead
+      tr
+        th Id
+        th Email
+        th Money
+        th Gold
+        th Food
+        th Ops
+  
+    tbody
+    each user in users
+      tr
+        td= user.id
+        td= user.email
+        td= user.gold
+        td= user.money
+        td= user.food
+        td
+          a(href="/characters/#{user.id}") edit
+    
