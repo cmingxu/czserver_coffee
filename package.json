@@ -24,6 +24,7 @@
     , "mkdirp": "*"
     , "connect-flash": "*"
     , "redis" : "*"
+    , "relative-date" : "*"
     , "wrench": "1.4.4"
   }, "scripts": {
     "install": "node node_modules/coffee-script/bin/cake build",

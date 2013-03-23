@@ -49,6 +49,15 @@ User.schema.virtual('password').set((password)->
     this.hashed_password = ""
 )
 
+User.schema.pre 'save', (next)->
+  if this.isNew
+    this.gold ||= 0
+    this.money ||= 0
+    this.food ||= 0
+    this.vip ||= "Vip1"
+
+  next()
+
 
 # pre, in case no password email passed in
 User.schema.pre 'validate', (next)->

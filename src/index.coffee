@@ -29,6 +29,7 @@ app.use everyauth.middleware()
 
 app.use (req, res, next)->
   res.locals.title ||= "CZSERVER"
+  res.locals.relativeDate = global.relative_date
   next()
 
  
