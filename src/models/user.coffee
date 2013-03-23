@@ -51,10 +51,10 @@ User.schema.virtual('password').set((password)->
 
 User.schema.pre 'save', (next)->
   if this.isNew
-    this.gold ||= 0
-    this.money ||= 0
-    this.food ||= 0
-    this.vip ||= "Vip1"
+    this.gold   ||= 0
+    this.money  ||= 0
+    this.food   ||= 0
+    this.vip    ||= "Vip1"
 
   next()
 

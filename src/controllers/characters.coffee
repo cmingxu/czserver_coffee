@@ -1,3 +1,4 @@
+User      = require '../models/user'
 Character = require '../models/character'
 
 # Character model's CRUD controller.
@@ -10,7 +11,11 @@ module.exports =
 
   # new character 
   new: (req, res) ->
-    res.render "characters/new"
+    User.findOne {_id: req.query.user_id}, (err, user)->
+      if err
+        res.send "error"
+      else
+        res.render "characters/new", {user}
     
       
   # Creates new character with data from `req.body`
