@@ -43,7 +43,7 @@ module.exports =
             res.redirect "users/new"
           else
             req.flash("flash", "user saved successfully")
-            res.redirect "users"
+            res.redirect "/tokens/new"
       )
 
         
