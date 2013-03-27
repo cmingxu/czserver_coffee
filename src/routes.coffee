@@ -15,8 +15,7 @@ module.exports  = (app) ->
   map(app, "token")
 
   app.get("/",            IndexController.index)
-  app.get("/",            IndexController.index)
   app.get("/login",       require("#{ROOT}/controllers/admins").login)
-  app.get("/home",        require("#{ROOT}/controllers/users").home)
+  #app.get("/home",        require("#{ROOT}/controllers/users").home)
   app.post("/admin/do_login",      require("#{ROOT}/controllers/admins").login)
 
