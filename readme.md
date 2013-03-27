@@ -11,6 +11,13 @@
 
 ## START ##
 
+需要先启动mongod和redis
+
+```
+sudo mongod
+sudo redis-server
+```
+
 ```
  cake dev
 ```
