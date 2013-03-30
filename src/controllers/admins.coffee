@@ -5,17 +5,19 @@ module.exports =
 
   login: (req, res, next) ->
     if req.method == "GET"
-      res.render("admins/login", {"field": "field content"})
+      res.render("admins/login", {flash: req.flash("flash")})
     else
-      Admin.findOne {email: req.body.email}, "", (err, uu)->
+      Admin.findOne {login: req.body.email}, "", (err, uu)->
         if uu
           if uu.password_correct(req.body.password)
-            req.logged_in = true
-            res.redirect_to("admins/users")
+            req.session.admin_id = uu._id
+            res.redirect("/admins/users")
           else
             res.statusCode = 401
-            res.render("admins/login", {field: "password", message: "password not correct", info: req.flash("info")})
+            req.flash "flash", "password not correct"
+            res.redirect("admins/login")
         else
           res.statusCode = 401
-          res.render("admins/login",  {"field": "email", message: "login / email not exists", info: req.flash("info")})
+          req.flash "flash", "login / email not exist"
+          res.redirect("admins/login")
 

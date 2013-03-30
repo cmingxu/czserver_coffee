@@ -8,6 +8,9 @@ class Admin extends MongoBase
     real_name : String
   )
 
+  @schema.methods.password_correct = (password)->
+    this.hashed_password == crypto.createHash("sha1").update(this.salt + "/" + password).digest("hex")
+
 admin = Admin.initialize()
 
 # TODO

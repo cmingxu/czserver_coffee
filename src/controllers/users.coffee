@@ -31,7 +31,7 @@ module.exports =
         res.statusCode = 201
       else
         result =  ErrorHelper.toFormattedError("user", err)
-        req.flash "info", result
+        req.flash "flash", result
         res.statusCode = 422
 
       res.format(
@@ -71,7 +71,6 @@ module.exports =
 
   # Deletes user by id
   destroy: (req, res) ->
-    console.log '1111111111111111111111111111'
     User.findByIdAndRemove req.params.user, (err) ->
       res.format(
         json: ()->

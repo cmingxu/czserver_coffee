@@ -16,6 +16,7 @@ module.exports  = (app) ->
 
   app.get("/",            IndexController.index)
   app.get("/login",       require("#{ROOT}/controllers/admins").login)
+  app.get("/admins/users",       require("#{ROOT}/controllers/users").index)
   #app.get("/home",        require("#{ROOT}/controllers/users").home)
   app.post("/admin/do_login",      require("#{ROOT}/controllers/admins").login)
 
