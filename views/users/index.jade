@@ -2,7 +2,8 @@ extend ../admin_layout
 
 block content
 
-  a.btn(href="users/new").btn-primary.pull-right 新建
+  if is_user
+    a.btn(href="/users/new").btn-primary.pull-right 新建
   
   table.table.table-striped.table-bordered
     thead
@@ -26,9 +27,11 @@ block content
         td
           #{relativeDate(user.created_at)}/#{relativeDate(user.updated_at)}
         td
-          a(href="/characters/new?user_id=#{user.id}").btn edit
-          form(method='POST', action='/users/' + user.id).form-append
-            input(type='hidden', name='_method', value='delete')
-            button(type='submit').btn remove
+          if is_user
+            a(href="/characters/new?user_id=#{user.id}").btn edit
+          if is_admin
+            form(method='POST', action='/users/' + user.id).form-append
+              input(type='hidden', name='_method', value='delete')
+              button(type='submit').btn remove
 
     

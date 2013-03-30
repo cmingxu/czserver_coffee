@@ -14,14 +14,14 @@ module.exports =
           else
             res.statusCode = 401
             req.flash "flash", "password not correct"
-            res.redirect("admin/login")
+            res.redirect("/admin/login")
         else
           res.statusCode = 401
           req.flash "flash", "login / email not exist"
-          res.redirect("admin/login")
+          res.redirect("/admin/login")
 
   logout: (req, res, next) ->
     req.session.admin_id = null
     req.flash "flash", "bye, admin"
-    res.redirect("admin/login")
+    res.redirect("/admin/login")
     

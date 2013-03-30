@@ -40,7 +40,7 @@ module.exports =
         html: ()->
           if err
             req.flash("flash", JSON.stringify(result))
-            res.redirect "users/new"
+            res.redirect "/users/new"
           else
             req.flash("flash", "user saved successfully")
             res.redirect "/tokens/new"

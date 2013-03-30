@@ -1,15 +1,13 @@
 Admin = require "#{ROOT}/models/admin"
 User = require "#{ROOT}/models/user"
 
-admin_paths = ["GET#/admin/users", "DELETE#users/.*"]
+admin_paths = ["GET#/admin/users", "DELETE#/users/.*"]
 user_paths  = ["GET#/users/.*", "GET#/users/.*", "PUT#/users/.*"]
 
 login_from_cookie = (req, res, next)->
-  console.log _.some(admin_paths, (p)-> !!("#{req.method.toUpperCase()}##{req.path}".match(p)))
   if _.some(admin_paths, (p)-> !!("#{req.method.toUpperCase()}##{req.path}".match(p)))
     if req.session.admin_id
       Admin.findOne req.session.admin_id, "", (err, uu)->
-        console.log uu
         if uu
           req.admin = uu
           req.logged_in = true
