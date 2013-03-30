@@ -66,15 +66,25 @@ module.exports =
           else
             res.send ErrorHelper.toFormattedError("user", err)
             res.statusCode = 422
-      else
+      else 
         res.statusCode = 404
-    
+
   # Deletes user by id
-  delete: (req, res) ->
+  destroy: (req, res) ->
+    console.log '1111111111111111111111111111'
     User.findByIdAndRemove req.params.user, (err) ->
-      if not err
-        res.send {}
-      else
-        res.send err
-      
-  
+      res.format(
+        json: ()->
+          if not err
+            res.send {}
+          else
+            res.send err
+        html: ()->
+          if not err
+            req.flash "flash", "user delete successfully"
+            res.redirect "/users"
+          else
+            req.flash "flash", JSON.stringfiy(err)
+            res.redirect "/users"
+      )
+

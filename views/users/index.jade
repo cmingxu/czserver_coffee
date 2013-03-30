@@ -26,5 +26,9 @@ block content
         td
           #{relativeDate(user.created_at)}/#{relativeDate(user.updated_at)}
         td
-          a(href="/characters/new?user_id=#{user.id}") edit
+          a(href="/characters/new?user_id=#{user.id}").btn edit
+          form(method='POST', action='/users/' + user.id).form-append
+            input(type='hidden', name='_method', value='delete')
+            button(type='submit').btn remove
+
     
