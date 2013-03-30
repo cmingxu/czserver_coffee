@@ -4,10 +4,10 @@ Token = require '../models/token'
 # Token model's CRUD controller.
 module.exports = 
   home: (req, res) ->
-    res.render "tokens/home", {flash: req.flash("info")}
+    res.render "tokens/home", {flash: req.flash("flash"), myself: req.user}
   # new token 
   new: (req, res) ->
-    res.render "tokens/new", {flash: req.flash("info")}
+    res.render "tokens/new", {flash: req.flash("flash")}
       
   # Creates new token with data from `req.body`
   create: (req, res) ->
@@ -22,7 +22,7 @@ module.exports =
               res.statusCode = 422
               res.send err
         html: ()->
-          User.findOne {email: req.body.email}, (err, user)->
+          User.findOne {login: req.body.email}, (err, user)->
             if user
               if user.password_correct(req.body.password)
                 req.session.user_id = user._id

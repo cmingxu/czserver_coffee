@@ -1,0 +1,34 @@
+.control-group
+  label.control-label(for="email") EMail
+  .controls
+    input(name="email", type='text', placeholder="email", value=_user.email)
+
+.control-group
+  label.control-label(for="password") 密码
+  .controls
+    input(type='password', name="password", placeholder="Password")
+.control-group
+  label.control-label(for="password_confirmation") 确认密码
+  .controls
+    input(type='password', name="password_confirmation", placeholder="Password")
+.control-group
+  label.control-label(for="gold") 金币
+  .controls
+    input(name="gold", value=_user.gold)
+.control-group
+  label.control-label(for="money") 金钱
+  .controls
+    input(name="money", value=_user.money)
+
+.control-group
+  label.control-label(for="food") Food
+  .controls
+    input(name="food", value=_user.food)
+
+.control-group
+  label.control-label(for="food") VIP
+  .controls
+    select(name="vip", value=_user.vip)
+      option(value='Vip1') VIP1
+      option(value='Vip2') VIP2
+      option(value='Vip3') VIP3

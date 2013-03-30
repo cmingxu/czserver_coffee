@@ -4,7 +4,9 @@ skip_white_list = [
   "GET#/admin/login"
   "POST#/admin/do_login", 
   "GET#/tokens/new",
+  "GET#/register",
   "POST#/tokens",
+  "POST#/users",
 ]
 
 

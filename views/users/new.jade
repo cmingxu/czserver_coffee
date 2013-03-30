@@ -4,40 +4,7 @@ block content
   form.form-horizontal(action="/users", method="POST")
     fieldset
       legend 注册
-      .control-group
-        label.control-label(for="email") EMail
-        .controls
-          input(name="email", type='text', placeholder="email")
-
-      .control-group
-        label.control-label(for="password") 密码
-        .controls
-          input(type='password', name="password", placeholder="Password")
-      .control-group
-        label.control-label(for="password_confirmation") 确认密码
-        .controls
-          input(type='password', name="password_confirmation", placeholder="Password")
-      .control-group
-        label.control-label(for="gold") 金币
-        .controls
-          input(name="gold", value="0")
-      .control-group
-        label.control-label(for="money") 金钱
-        .controls
-          input(name="money", value="0")
-
-      .control-group
-        label.control-label(for="food") Food
-        .controls
-          input(name="food", value="0")
-
-      .control-group
-        label.control-label(for="food") VIP
-        .controls
-          select(name="vip", value="Vip1")
-            option(value='Vip1') VIP1
-            option(value='Vip2') VIP2
-            option(value='Vip3') VIP3
+      include _user
       .form-actions
         button(type='submit').btn.btn-primary 注册
         a(href='/tokens/new').btn 登录

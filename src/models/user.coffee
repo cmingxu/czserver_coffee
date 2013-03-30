@@ -1,4 +1,5 @@
 crypto = require 'crypto'
+Character = require "#{ROOT}/models/character"
 
 class User extends MongoBase
   @schema = @Schema(
@@ -23,7 +24,12 @@ class User extends MongoBase
   @schema.methods.password_correct = (password)->
     this.hashed_password == crypto.createHash("sha1").update(this.salt + "/" + password).digest("hex")
 
-  @schema.method.load_prod
+  @schema.methods.with_its_character = (callback) ->
+    Character.find {user: this._id}, {}, (err, character)->
+      if err
+        callback(err, null)
+      else
+        callback(null, character)
 
 
 Uu = User.initialize()

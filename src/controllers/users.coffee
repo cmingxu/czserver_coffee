@@ -19,7 +19,7 @@ module.exports =
   # new user 
   new: (req, res) ->
     user = new User
-    res.render "users/new", {flash: req.flash("flash")}
+    res.render "users/new", {flash: req.flash("flash"), _user: {gold: 0, food: 0, vip: "VIP1", money: 0}}
       
   # Creates new user with data from `req.body`
   #TODO should be logged in here
@@ -40,7 +40,7 @@ module.exports =
         html: ()->
           if err
             req.flash("flash", JSON.stringify(result))
-            res.redirect "/users/new"
+            res.render "users/new", {_user: req.body}
           else
             req.flash("flash", "user saved successfully")
             res.redirect "/tokens/new"

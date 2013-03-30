@@ -1,0 +1,13 @@
+extend ../layout
+
+
+block content
+  h1 My HOME
+
+  form.form-horizontal(action="/users/#{myself._id}", method="PUT")
+    fieldset
+    _user = myself
+    include ../users/_user
+
+    _character = myself.character
+    include ../characters/_character
