@@ -24,19 +24,19 @@ module.exports =
         html: ()->
           User.findOne {email: req.body.email}, (err, user)->
             if user
-              if user.password_valid(req.body.password)
+              if user.password_correct(req.body.password)
                 req.session.user_id = user._id
                 req.logged_in = true
-                res.flash "flash", "welcome"
+                req.flash "flash", "welcome"
                 res.redirect "/home"
 
               else
                 res.statusCode = 401
-                res.flash "flash", "password not correct"
+                req.flash "flash", "password not correct"
                 res.redirect "tokens/new"
             else
               res.statusCode = 404
-              res.flash "flash", "User not found"
+              req.flash "flash", "User not found"
               res.redirect "tokens/new"
       )
 
