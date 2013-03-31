@@ -1,4 +1,5 @@
 User = require '../models/user'
+Character = require '../models/character'
 
 # User model's CRUD controller.
 module.exports = 
@@ -25,6 +26,7 @@ module.exports =
   #TODO should be logged in here
   create: (req, res) ->
     user = new User req.body
+    user.character = new Character
     user.save (err, user) ->
       if not err
         result = user
@@ -61,11 +63,21 @@ module.exports =
       if not err
         _.extend(user, req.body)
         user.save (err, user)->
-          if not err
-            res.send user
-          else
-            res.send ErrorHelper.toFormattedError("user", err)
-            res.statusCode = 422
+          res.format(
+            json: ()->
+              if not err
+                res.send user
+              else
+                res.send ErrorHelper.toFormattedError("user", err)
+                res.statusCode = 422
+            html: ()->
+              if err
+                req.flash("flash", JSON.stringify(err))
+                res.redirect "/home"
+              else
+                req.flash("flash", "user saved successfully")
+                res.redirect "/home"
+          )
       else 
         res.statusCode = 404
 

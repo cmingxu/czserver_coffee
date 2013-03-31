@@ -21,7 +21,12 @@ module.exports =
           res.redirect("/admin/login")
 
   logout: (req, res, next) ->
+    is_user = req.session.user_id
     req.session.admin_id = null
-    req.flash "flash", "bye, admin"
-    res.redirect("/admin/login")
+    req.session.user_id = null
+    req.flash "flash", "bye"
+    if is_user
+      res.redirect("/admin/login")
+    else
+      res.redirect("/tokens/new")
     

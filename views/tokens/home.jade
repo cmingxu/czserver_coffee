@@ -3,11 +3,21 @@ extend ../layout
 
 block content
   h1 My HOME
+  .row
+    .span5
+      form.form-horizontal(action="/users/#{myself._id}", method="POST")
+        _user = myself
+        input(type='hidden', name='_method', value="PUT")
+        include ../users/_user
+        .form-actions
+          button(type='submit').btn.btn-pimary 修改
 
-  form.form-horizontal(action="/users/#{myself._id}", method="PUT")
-    fieldset
-    _user = myself
-    include ../users/_user
-
-    _character = myself.character
-    include ../characters/_character
+    .span5
+      form.form-horizontal(action="/characters/#{myself.character._id}",
+method="POST")
+        _character = myself.character
+        input(type='hidden', name='user_id', value=#{myself._id})
+        input(type='hidden', name='_method', value="PUT")
+        include ../characters/_character
+        .form-actions
+          button(type='submit').btn.btn-primary 修改

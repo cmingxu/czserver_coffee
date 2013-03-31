@@ -42,7 +42,8 @@ User.schema.path('email').validate User.validation({message: FN.user_email_not_v
 email_uniq_validator = (email, callback)->
   Uu.findOne(email: email).exec (err, uu)->
     if uu then callback(false) else callback(true)
-User.schema.path('email').validate email_uniq_validator, FN.user_email_should_be_uniq[CONFIG.notice]
+# User.schema.path('email').validate email_uniq_validator, FN.user_email_should_be_uniq[CONFIG.notice]
+
 User.schema.path('hashed_password').validate User.validation({message: FN.user_password_should_not_blank[CONFIG.notice]}, "notEmpty")
 
 # virtual attributes
@@ -54,6 +55,11 @@ User.schema.virtual('password').set((password)->
     this.salt = ""
     this.hashed_password = ""
 )
+
+User.schema.post 'save', (user)->
+  if this.character
+    this.character.user = new Schema.ObjectId(this._id)
+    this.character.save (err, c)->
 
 User.schema.pre 'save', (next)->
   if this.isNew

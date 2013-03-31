@@ -41,11 +41,21 @@ module.exports =
   # Updates character with data from `req.body`
   update: (req, res) ->
     Character.findByIdAndUpdate req.params.character, {"$set":req.body}, (err, character) ->
-      if not err
-        res.send character
-      else
-        res.send err
-        res.statusCode = 500
+      res.format(
+        json: ()->
+          if not err
+            res.send user
+          else
+            res.send ErrorHelper.toFormattedError("user", err)
+            res.statusCode = 422
+        html: ()->
+          if err
+            req.flash("flash", JSON.stringify(err))
+            res.redirect "/home"
+          else
+            req.flash("flash", "user saved successfully")
+            res.redirect "/home"
+      )
     
   # Deletes character by 
   destroy: (req, res) ->
