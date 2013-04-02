@@ -76,7 +76,6 @@
 
 ### `GET: /users/:id` 获取:id的用户信息
 用于查看其它玩家信息
-
 ### `GET: /characters/:id` 玩家的角色资源
 
 ### `GET: /bootstraps/:id` ？？玩家登陆后，一次性返回游戏所需资料
@@ -103,5 +102,43 @@
 
 
 ------------------------------------------------------------------
+
+## 典型的操作流程（curl）
+### 创建用户
+  ```
+  curl -X POST -d "email=admin@admin.com&password=password" -H "Accept: appliation/json" 0.0.0.0:3000/users
+  {
+    "__v": 0,
+    "vip": "Vip1",
+    "food": 0,
+    "money": 0,
+    "gold": 0,
+    "email": "admin@admin.com",
+    "hashed_password": "af95d1f45dea0958826bc091da25b04952710714",
+    "salt": "divAJNEbY3-8JGyFCIz8nQ==",
+    "_id": "515acdf9f337a42a2d00001b",
+    "updated_at": "2013-04-02T12:24:25.815Z",
+    "created_at": "2013-04-02T12:24:25.815Z"
+  
+  ```
+### 登录
+  ```
+  curl -X POST -d "email=admin@admin.com&password=password" -H "Accept: application/json" 0.0.0.0:3000/tokens
+  {
+    "token": "NTE1YWNkZjBmMzM3YTQyYTJkMDAwMDA1LzEzNjQ5MDU1NDc5MDI=",
+    "hasCharacter": false }
+  
+  ```
+### 使用token请求用户信息
+  ```
+    curl -X GET  -H "Accept: application/json" 0.0.0.0:3000/users/515acdf9f337a42a2d00001b -H "Auth-Token: NTE1YWNkZjBmMzM3YTQyYTJkMDAwMDA1LzEzNjQ5MDU1NDc5MDI="
+    
+  ```
+### token使用wrong example
+
+  ```
+  curl  -X GET  -H "Accept: application/json" 0.0.0.0:3000/users/515acdf9f337a42a2d00001b -H "Auth-Token: NTE1YWNkZjBmMzM3YTQyYTJkMDAwMDA1LzEzNjQ5MDU1NDc5MDI=123" -H "Content-Type: application/json"
+    
+  ```
 
 [返回首页](./index.md)

@@ -26,6 +26,7 @@ module.exports =
   #TODO should be logged in here
   create: (req, res) ->
     user = new User req.body
+    console.log req.body
     user.character = new Character
     user.save (err, user) ->
       if not err
