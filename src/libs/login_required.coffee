@@ -1,12 +1,16 @@
 skip_white_list = [
+  "GET#/", 
+  "GET#/register",
   "GET#/login", 
+  "GET#/logout", 
+  "GET#/tokens/new",
+  "POST#/tokens",
+  "POST#/users",
+
   "GET#/admin/logout"
   "GET#/admin/login"
   "POST#/admin/do_login", 
-  "GET#/tokens/new",
-  "GET#/register",
-  "POST#/tokens",
-  "POST#/users",
+
 ]
 
 
@@ -27,7 +31,7 @@ login_required = (req, res, next)->
         res.end('{"error": "no authorization"}')
       else
         req.flash("flash", "you just access limited resource, login required")
-        res.redirect("/admin/login")
+        res.redirect("/users/login")
 
 
 

@@ -53,6 +53,6 @@ module.exports =
   destroy: (req, res) ->
     req.session.user_id = null
     req.flash "flash", "bye, user"
-    res.redirect("/tokens/new")
+    res.redirect("/login")
       
   
